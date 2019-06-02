@@ -1,4 +1,7 @@
-﻿using System;
+﻿using IHC.Contexts;
+using IHC.Enums;
+using IHC.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,10 +13,10 @@ using System.Windows.Forms;
 
 namespace IHC
 {
-    public partial class Form1 : Form
+    public partial class ProjectsList : Form
     {
         
-        public Form1()
+        public ProjectsList()
         {
             InitializeComponent();
             
@@ -21,8 +24,12 @@ namespace IHC
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 formulario = new Form2();
-            formulario.ShowDialog();
+            ProjectForm projectForm = new ProjectForm();
+            projectForm.ShowDialog();
+        }
+
+        private void Button5_Click(object sender, EventArgs e)
+        {
         }
     }
 }

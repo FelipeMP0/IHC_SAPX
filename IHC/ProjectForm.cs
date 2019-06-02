@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace IHC
 {
-    public partial class Form2 : Form
+    public partial class ProjectForm : Form
     {
-        public Form2()
+        public ProjectForm()
         {
             InitializeComponent();
         }

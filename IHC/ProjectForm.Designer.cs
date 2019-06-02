@@ -1,6 +1,6 @@
 ﻿namespace IHC
 {
-    partial class Form2
+    partial class ProjectForm
     {
         /// <summary>
         /// Required designer variable.
