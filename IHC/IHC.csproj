@@ -67,7 +67,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexts\IhcContext.cs" />
+    <Compile Include="CustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerForm.Designer.cs">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerListForm.Designer.cs">
+      <DependentUpon>CustomerListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Enums\ProjectState.cs" />
+    <Compile Include="JobRoleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JobRoleForm.Designer.cs">
+      <DependentUpon>JobRoleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JobRoleListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JobRoleListForm.Designer.cs">
+      <DependentUpon>JobRoleListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectsList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +131,18 @@
     <Compile Include="Services\ManagerService.cs" />
     <Compile Include="Services\PlanningService.cs" />
     <Compile Include="Services\ProjectService.cs" />
+    <EmbeddedResource Include="CustomerForm.resx">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerListForm.resx">
+      <DependentUpon>CustomerListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JobRoleForm.resx">
+      <DependentUpon>JobRoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JobRoleListForm.resx">
+      <DependentUpon>JobRoleListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProjectsList.resx">
       <DependentUpon>ProjectsList.cs</DependentUpon>
     </EmbeddedResource>

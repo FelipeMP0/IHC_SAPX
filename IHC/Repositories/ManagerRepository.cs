@@ -47,7 +47,7 @@ namespace IHC.Repositories
 
         public Manager ReadById(long id)
         {
-            return Context.Managers.First(m => m.Id == id);
+            return Context.Managers.FirstOrDefault(m => m.Id == id);
         }
 
         public IEnumerable<Manager> ReadAll()

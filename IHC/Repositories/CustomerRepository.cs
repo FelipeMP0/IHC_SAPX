@@ -52,7 +52,7 @@ namespace IHC.Repositories
 
         public IEnumerable<Customer> ReadAll()
         {
-            return Context.Customers;
+            return Context.Customers.OrderBy(c => c.Id);
         }
 
         public void Dispose()

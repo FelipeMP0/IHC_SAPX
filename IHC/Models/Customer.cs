@@ -10,7 +10,7 @@ namespace IHC.Models
         [Key]
         public long Id { get; set; }
         [Required]
-        [Index("Idx_Customer_Document", 1, IsUnique = true)]
+        //[Index("Idx_Customer_Document", 1, IsUnique = true)]
         [StringLength(15)]
         public string Document { get; set; }
         [Required]

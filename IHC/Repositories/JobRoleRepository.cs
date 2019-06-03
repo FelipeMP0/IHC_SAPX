@@ -50,7 +50,7 @@ namespace IHC.Repositories
 
         public IEnumerable<JobRole> ReadAll()
         {
-            return Context.JobRoles;
+            return Context.JobRoles.OrderBy(jb => jb.Id);
         }
 
         public void Dispose()
