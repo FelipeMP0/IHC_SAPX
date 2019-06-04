@@ -19,7 +19,7 @@ namespace IHC.Repositories
 
         public Project Create(Project project)
         {
-            Context.Projects.Add(project);
+            project = Context.Projects.Add(project);
             Context.SaveChanges();
 
             return project;
@@ -45,7 +45,10 @@ namespace IHC.Repositories
         public void DeleteById(long id)
         {
             var projectToDelete = Context.Projects.First(p => p.Id == id);
-            Context.Set<Project>().Remove(projectToDelete);
+            projectToDelete.Customer = null;
+            projectToDelete.Manager = null;
+            projectToDelete.Plannings = null;
+            Context.Entry(projectToDelete).State = EntityState.Deleted;
             Context.SaveChanges();
         }
 

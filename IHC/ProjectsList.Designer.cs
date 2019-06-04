@@ -38,11 +38,13 @@
             this.button2 = new System.Windows.Forms.Button();
             this.btnNovoProjeto = new System.Windows.Forms.Button();
             this.dgvProjects = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Editar = new System.Windows.Forms.DataGridViewImageColumn();
             this.Remover = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnDetalhes = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProjects)).BeginInit();
             this.SuspendLayout();
@@ -195,6 +197,7 @@
             // 
             this.dgvProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProjects.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
             this.Nome,
             this.Cliente,
             this.Estado,
@@ -202,31 +205,47 @@
             this.Remover});
             this.dgvProjects.Location = new System.Drawing.Point(223, 117);
             this.dgvProjects.Name = "dgvProjects";
-            this.dgvProjects.Size = new System.Drawing.Size(798, 478);
+            this.dgvProjects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProjects.Size = new System.Drawing.Size(798, 446);
             this.dgvProjects.TabIndex = 1;
+            this.dgvProjects.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvProjects_CellContentClick);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Visible = false;
             // 
             // Nome
             // 
             this.Nome.HeaderText = "Nome";
             this.Nome.Name = "Nome";
+            this.Nome.ReadOnly = true;
+            this.Nome.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Nome.Width = 280;
             // 
             // Cliente
             // 
             this.Cliente.HeaderText = "Cliente";
             this.Cliente.Name = "Cliente";
+            this.Cliente.ReadOnly = true;
+            this.Cliente.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Cliente.Width = 250;
             // 
             // Estado
             // 
             this.Estado.HeaderText = "Estado";
             this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            this.Estado.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // Editar
             // 
             this.Editar.HeaderText = "Editar";
             this.Editar.Name = "Editar";
-            this.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Editar.ReadOnly = true;
+            this.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Editar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Editar.Width = 60;
             // 
@@ -234,9 +253,23 @@
             // 
             this.Remover.HeaderText = "Remover";
             this.Remover.Name = "Remover";
-            this.Remover.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Remover.ReadOnly = true;
+            this.Remover.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Remover.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Remover.Width = 60;
+            // 
+            // btnDetalhes
+            // 
+            this.btnDetalhes.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnDetalhes.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDetalhes.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnDetalhes.Location = new System.Drawing.Point(223, 570);
+            this.btnDetalhes.Name = "btnDetalhes";
+            this.btnDetalhes.Size = new System.Drawing.Size(798, 37);
+            this.btnDetalhes.TabIndex = 29;
+            this.btnDetalhes.Text = "Ver Detalhes";
+            this.btnDetalhes.UseVisualStyleBackColor = false;
+            this.btnDetalhes.Click += new System.EventHandler(this.BtnDetalhes_Click);
             // 
             // ProjectsList
             // 
@@ -244,6 +277,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(1033, 619);
+            this.Controls.Add(this.btnDetalhes);
             this.Controls.Add(this.dgvProjects);
             this.Controls.Add(this.panel1);
             this.Name = "ProjectsList";
@@ -270,11 +304,13 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvProjects;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewImageColumn Editar;
         private System.Windows.Forms.DataGridViewImageColumn Remover;
+        private System.Windows.Forms.Button btnDetalhes;
     }
 }
 

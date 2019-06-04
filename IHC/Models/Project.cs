@@ -22,9 +22,9 @@ namespace IHC.Models
         public double ExpectedReveneu { get; set; }
         [Required]
         public ProjectState State { get; set; }
-        [Required]
+        public long ManagerId { get; set; }
         public Manager Manager { get; set; }
-        [Required]
+        public long CustomerId { get; set; }
         public Customer Customer { get; set; }
         public ICollection<Planning> Plannings { get; set; }
 

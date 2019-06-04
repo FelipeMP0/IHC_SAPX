@@ -31,6 +31,8 @@ namespace IHC
             };
 
             _service.Create(jobRole);
+            MessageBox.Show("Cargo salvo com sucesso", "Cargos", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            Close();
         }
     }
 }

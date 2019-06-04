@@ -9,6 +9,6 @@ namespace IHC.Services.Interfaces
         Planning Update(Planning planning);
         void DeleteById(long id);
         Planning ReadById(long id);
-        IEnumerable<Planning> ReadAll();
+        IEnumerable<Planning> ReadAllByProjectId(long projectId);
     }
 }

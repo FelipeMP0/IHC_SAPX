@@ -19,7 +19,7 @@ namespace IHC.Repositories
 
         public Customer Create(Customer customer)
         {
-            Context.Customers.Add(customer);
+            customer = Context.Customers.Add(customer);
             Context.SaveChanges();
 
             return customer;

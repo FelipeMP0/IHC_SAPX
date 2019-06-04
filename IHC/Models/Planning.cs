@@ -8,9 +8,9 @@ namespace IHC.Models
     {
         [Key]
         public long Id { get; set; }
-        [Required]
+        public long JobRoleId { get; set; }
         public JobRole JobRole { get; set; }
-        [Required]
+        public long ProjectId { get; set; }
         public Project Project { get; set; }
         [Required]
         [Range(1, int.MaxValue)]

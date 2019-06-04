@@ -19,7 +19,7 @@ namespace IHC.Repositories
 
         public Planning Create(Planning planning)
         {
-            Context.Plannings.Add(planning);
+            planning = Context.Plannings.Add(planning);
             Context.SaveChanges();
 
             return planning;
@@ -49,9 +49,9 @@ namespace IHC.Repositories
             return Context.Plannings.First(p => p.Id == id);
         }
 
-        public IEnumerable<Planning> ReadAll()
+        public IEnumerable<Planning> ReadAllByProjectId(long projectId)
         {
-            return Context.Plannings;
+            return Context.Plannings.Where(p => p.ProjectId == projectId);
         }
 
         public void Dispose()

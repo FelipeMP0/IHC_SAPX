@@ -43,6 +43,8 @@ namespace IHC
             };
 
             _service.Create(customer);
+            MessageBox.Show("Cliente salvo com sucesso", "Clientes", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            Close();
         }
     }
 }

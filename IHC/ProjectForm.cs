@@ -13,6 +13,7 @@ namespace IHC
         CustomerService _customerService;
         JobRoleService _jobRoleService;
         ManagerService _managerService;
+        PlanningService _planningService;
         Manager defaultManager;
 
         public ProjectForm()
@@ -22,6 +23,7 @@ namespace IHC
             _customerService = new CustomerService();
             _jobRoleService = new JobRoleService();
             _managerService = new ManagerService();
+            _planningService = new PlanningService();
 
             defaultManager = new Manager()
             {
@@ -32,8 +34,9 @@ namespace IHC
                 Password = "fsadf"
             };
 
-            defaultManager = _managerService.ReadById(defaultManager.Id);
-            if (defaultManager == null)
+            Manager foundManager = _managerService.ReadById(defaultManager.Id);
+
+            if (foundManager == null)
             {
                 defaultManager = _managerService.Create(defaultManager);
             }
@@ -61,23 +64,9 @@ namespace IHC
                 EndDate = dtpFim.Value,
                 ExpectedReveneu = (double) numReceita.Value,
                 State = ProjectStateExtensions.GetValueFromDescription<ProjectState>(cbEstado.Text),
-                Manager = defaultManager,
-                Customer = customer
+                ManagerId = defaultManager.Id,
+                CustomerId = customer.Id
             };
-
-            if (customer.Projects == null)
-            {
-                customer.Projects = new List<Project>();
-            }
-
-            customer.Projects.Add(project);
-
-            if (defaultManager.Projects == null)
-            {
-                defaultManager.Projects = new List<Project>();
-            }
-
-            defaultManager.Projects.Add(project);
 
             List<Planning> plannings = new List<Planning>();
 
@@ -90,22 +79,18 @@ namespace IHC
 
                     Planning planning = new Planning()
                     {
-                        JobRole = jobRole,
-                        Project = project
+                        JobRoleId = jobRole.Id,
+                        Project = project,
+                        PlannedHours = (int) numHoras.Value
                     };
 
-                    if (jobRole.Plannings == null)
-                    {
-                        jobRole.Plannings = new List<Planning>();
-                    }
-
-                    jobRole.Plannings.Add(planning);
+                    plannings.Add(planning);
                 }
             }
-
             project.Plannings = plannings;
-
             _service.Create(project);
+            MessageBox.Show("Projeto salvo com sucesso", "Projetos", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            Close();
         }
 
         private void loadCustomersToComboBox()

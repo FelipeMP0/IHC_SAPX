@@ -24,9 +24,9 @@ namespace IHC.Services
             _planningRepository.DeleteById(id);
         }
 
-        public IEnumerable<Planning> ReadAll()
+        public IEnumerable<Planning> ReadAllByProjectId(long projectId)
         {
-            return _planningRepository.ReadAll();
+            return _planningRepository.ReadAllByProjectId(projectId);
         }
 
         public Planning ReadById(long id)

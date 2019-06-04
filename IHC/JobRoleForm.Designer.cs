@@ -112,6 +112,7 @@
             this.Controls.Add(this.label1);
             this.Name = "JobRoleForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cargo";
             this.ResumeLayout(false);
             this.PerformLayout();

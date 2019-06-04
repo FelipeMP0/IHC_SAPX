@@ -54,7 +54,7 @@
             this.Cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nível = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HorasNecessárias = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remover = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remover = new System.Windows.Forms.DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)(this.numReceita)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHoras)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecursos)).BeginInit();
@@ -323,6 +323,8 @@
             // 
             this.Remover.HeaderText = "Remover";
             this.Remover.Name = "Remover";
+            this.Remover.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Remover.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // ProjectForm
             // 
@@ -394,6 +396,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cargo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nível;
         private System.Windows.Forms.DataGridViewTextBoxColumn HorasNecessárias;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Remover;
+        private System.Windows.Forms.DataGridViewImageColumn Remover;
     }
 }

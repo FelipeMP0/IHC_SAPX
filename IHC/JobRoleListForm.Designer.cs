@@ -65,26 +65,32 @@
             // 
             this.Nome.HeaderText = "Nome";
             this.Nome.Name = "Nome";
+            this.Nome.ReadOnly = true;
+            this.Nome.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Nome.Width = 250;
             // 
             // Nível
             // 
             this.Nível.HeaderText = "Nível";
             this.Nível.Name = "Nível";
+            this.Nível.ReadOnly = true;
+            this.Nível.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Nível.Width = 250;
             // 
             // Editar
             // 
             this.Editar.HeaderText = "Editar";
             this.Editar.Name = "Editar";
-            this.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Editar.ReadOnly = true;
+            this.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Editar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // Remover
             // 
             this.Remover.HeaderText = "Remover";
             this.Remover.Name = "Remover";
-            this.Remover.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Remover.ReadOnly = true;
+            this.Remover.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Remover.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // JobRoleListForm
@@ -97,6 +103,7 @@
             this.Controls.Add(this.label1);
             this.Name = "JobRoleListForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lista de Cargos";
             this.Load += new System.EventHandler(this.JobRoleListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgpJobRoles)).EndInit();
