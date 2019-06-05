@@ -32,7 +32,7 @@ namespace IHC.Repositories
             customerToUpdate.Phone = customer.Phone;
             customerToUpdate.Document = customer.Document;
             customerToUpdate.Email = customer.Email;
-            Context.Entry(customer).State = EntityState.Modified;
+            Context.Entry(customerToUpdate).State = EntityState.Modified;
             Context.SaveChanges();
 
             return customer;

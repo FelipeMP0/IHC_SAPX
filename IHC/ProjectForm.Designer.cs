@@ -49,12 +49,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.dgvRecursos = new System.Windows.Forms.DataGridView();
-            this.btnSalvar = new System.Windows.Forms.Button();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nível = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HorasNecessárias = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remover = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnSalvar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numReceita)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHoras)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecursos)).BeginInit();
@@ -275,22 +275,12 @@
             this.HorasNecessárias,
             this.Remover});
             this.dgvRecursos.Location = new System.Drawing.Point(18, 496);
+            this.dgvRecursos.MultiSelect = false;
             this.dgvRecursos.Name = "dgvRecursos";
+            this.dgvRecursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRecursos.Size = new System.Drawing.Size(810, 207);
             this.dgvRecursos.TabIndex = 27;
-            // 
-            // btnSalvar
-            // 
-            this.btnSalvar.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalvar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSalvar.Location = new System.Drawing.Point(18, 709);
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(810, 37);
-            this.btnSalvar.TabIndex = 28;
-            this.btnSalvar.Text = "Salvar e Finalizar";
-            this.btnSalvar.UseVisualStyleBackColor = false;
-            this.btnSalvar.Click += new System.EventHandler(this.BtnSalvar_Click);
+            this.dgvRecursos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvRecursos_CellContentClick);
             // 
             // Id
             // 
@@ -326,13 +316,26 @@
             this.Remover.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Remover.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // btnSalvar
+            // 
+            this.btnSalvar.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalvar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSalvar.Location = new System.Drawing.Point(18, 709);
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Size = new System.Drawing.Size(810, 37);
+            this.btnSalvar.TabIndex = 28;
+            this.btnSalvar.Text = "Salvar e Finalizar";
+            this.btnSalvar.UseVisualStyleBackColor = false;
+            this.btnSalvar.Click += new System.EventHandler(this.BtnSalvar_Click);
+            // 
             // ProjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.ClientSize = new System.Drawing.Size(874, 530);
+            this.ClientSize = new System.Drawing.Size(891, 530);
             this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.dgvRecursos);
             this.Controls.Add(this.label9);

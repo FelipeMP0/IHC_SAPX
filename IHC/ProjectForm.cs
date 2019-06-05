@@ -3,6 +3,7 @@ using IHC.Models;
 using IHC.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace IHC
@@ -15,6 +16,8 @@ namespace IHC
         ManagerService _managerService;
         PlanningService _planningService;
         Manager defaultManager;
+        private long? idToUpdate;
+        private List<Planning> planningsToDelete;
 
         public ProjectForm()
         {
@@ -40,6 +43,45 @@ namespace IHC
             {
                 defaultManager = _managerService.Create(defaultManager);
             }
+
+            Activated += new EventHandler(ProjectForm_Activated);
+        }
+
+        public ProjectForm(long id) : this()
+        {
+            idToUpdate = id;
+
+            if (idToUpdate != null)
+            {
+                Project project = _service.ReadById(Convert.ToInt64(idToUpdate));
+                project.Customer = _customerService.ReadById(project.CustomerId);
+                project.Manager = _managerService.ReadById(project.ManagerId);
+                project.Plannings = _planningService.ReadAllByProjectId(project.Id).ToList();
+                txtNome.Text = project.Name;
+                dtpInicio.Value = project.StartDate;
+                dtpFim.Value = project.EndDate;
+                numReceita.Value = (decimal) project.ExpectedReveneu;
+                cbEstado.Text = ProjectStateExtensions.ToDescriptionString(project.State);
+                cbCliente.Text = project.Customer.Id + " " + project.Customer.Name;
+                
+                if (project.Plannings != null)
+                {
+                    foreach (var planning in project.Plannings)
+                    {
+                        planning.JobRole = _jobRoleService.ReadById(planning.JobRoleId);
+                        dgvRecursos.Rows.Add(planning.JobRole.Id, planning.JobRole.Name, planning.JobRole.Level, planning.PlannedHours);
+                        planning.JobRole = null;
+                    }
+                }
+
+                planningsToDelete = project.Plannings.ToList();
+            }
+        }
+
+        private void ProjectForm_Activated(object sender, EventArgs e)
+        {
+            LoadCustomersToComboBox();
+            LoadJobRolesToComboBox();
         }
 
         private void BtnIncluir_Click(object sender, EventArgs e)
@@ -62,11 +104,16 @@ namespace IHC
                 Name = txtNome.Text,
                 StartDate = dtpInicio.Value,
                 EndDate = dtpFim.Value,
-                ExpectedReveneu = (double) numReceita.Value,
+                ExpectedReveneu = (double)numReceita.Value,
                 State = ProjectStateExtensions.GetValueFromDescription<ProjectState>(cbEstado.Text),
                 ManagerId = defaultManager.Id,
                 CustomerId = customer.Id
             };
+
+            if (idToUpdate != null)
+            {
+                project.Id = Convert.ToInt64(idToUpdate);
+            }
 
             List<Planning> plannings = new List<Planning>();
 
@@ -80,30 +127,46 @@ namespace IHC
                     Planning planning = new Planning()
                     {
                         JobRoleId = jobRole.Id,
-                        Project = project,
-                        PlannedHours = (int) numHoras.Value
+                        ProjectId = project.Id,
+                        PlannedHours = Convert.ToInt32(row.Cells[3].Value)
                     };
 
                     plannings.Add(planning);
                 }
             }
             project.Plannings = plannings;
-            _service.Create(project);
+
+            if (idToUpdate == null)
+            {
+                _service.Create(project);
+            }
+            else
+            {
+                if (planningsToDelete != null) { 
+                    foreach (var planning in planningsToDelete)
+                    {
+                        _planningService.DeleteById(planning.Id);
+                    }
+                }
+                _service.Update(project);
+            }
             MessageBox.Show("Projeto salvo com sucesso", "Projetos", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             Close();
         }
 
-        private void loadCustomersToComboBox()
+        private void LoadCustomersToComboBox()
         {
-            IEnumerable<Customer> customers =_customerService.ReadAll();
+            cbCliente.Items.Clear();
+            IEnumerable<Customer> customers = _customerService.ReadAll();
             foreach (var customer in customers)
             {
                 cbCliente.Items.Add(customer.Id + " " + customer.Name);
             }
         }
 
-        private void loadJobRolesToComboBox()
+        private void LoadJobRolesToComboBox()
         {
+            cbRecurso.Items.Clear();
             IEnumerable<JobRole> jobRoles = _jobRoleService.ReadAll();
             foreach (var jobRole in jobRoles)
             {
@@ -119,8 +182,8 @@ namespace IHC
 
         private void ProjectForm_Load(object sender, EventArgs e)
         {
-            loadCustomersToComboBox();
-            loadJobRolesToComboBox();
+            LoadCustomersToComboBox();
+            LoadJobRolesToComboBox();
             loadStateToComboBox();
         }
 
@@ -128,6 +191,14 @@ namespace IHC
         {
             string[] values = cbRecurso.Text.Split(' ');
             dgvRecursos.Rows.Add(values[0], values[1], values[2], numHoras.Value.ToString(), null);
+        }
+
+        private void DgvRecursos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 4)
+            {
+                dgvRecursos.Rows.RemoveAt(dgvRecursos.SelectedRows[0].Index);
+            }
         }
     }
 }

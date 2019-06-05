@@ -1,13 +1,6 @@
 ﻿using IHC.Models;
 using IHC.Services;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IHC
@@ -15,11 +8,25 @@ namespace IHC
     public partial class JobRoleForm : Form
     {
         JobRoleService _service;
+        private long? idToUpdate;
 
         public JobRoleForm()
         {
             InitializeComponent();
             _service = new JobRoleService();
+        }
+
+        public JobRoleForm(long id) : this()
+        {
+            idToUpdate = id;
+
+            if (idToUpdate != null)
+            {
+                JobRole jobRole = _service.ReadById(Convert.ToInt64(idToUpdate));
+
+                txtCargo.Text = jobRole.Name;
+                txtNivel.Text = jobRole.Level;
+            }
         }
 
         private void BtnSalvar_Click(object sender, EventArgs e)
@@ -30,7 +37,19 @@ namespace IHC
                 Level = txtNivel.Text
             };
 
-            _service.Create(jobRole);
+            if (idToUpdate != null)
+            {
+                jobRole.Id = Convert.ToInt64(idToUpdate);
+            }
+
+            if (jobRole.Id == 0)
+            {
+                _service.Create(jobRole);
+            } else
+            {
+                _service.Update(jobRole);
+            }
+
             MessageBox.Show("Cargo salvo com sucesso", "Cargos", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             Close();
         }

@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.dgpCustomers = new System.Windows.Forms.DataGridView();
+            this.dgvCustomers = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CNPJCPF = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Editar = new System.Windows.Forms.DataGridViewImageColumn();
             this.Remover = new System.Windows.Forms.DataGridViewImageColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgpCustomers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -48,18 +49,28 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Lista de Clientes";
             // 
-            // dgpCustomers
+            // dgvCustomers
             // 
-            this.dgpCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgpCustomers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCustomers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
             this.CNPJCPF,
             this.Nome,
             this.Editar,
             this.Remover});
-            this.dgpCustomers.Location = new System.Drawing.Point(18, 74);
-            this.dgpCustomers.Name = "dgpCustomers";
-            this.dgpCustomers.Size = new System.Drawing.Size(770, 355);
-            this.dgpCustomers.TabIndex = 3;
+            this.dgvCustomers.Location = new System.Drawing.Point(18, 74);
+            this.dgvCustomers.MultiSelect = false;
+            this.dgvCustomers.Name = "dgvCustomers";
+            this.dgvCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCustomers.Size = new System.Drawing.Size(770, 355);
+            this.dgvCustomers.TabIndex = 3;
+            this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgpCustomers_CellContentClick);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
             // 
             // CNPJCPF
             // 
@@ -99,14 +110,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dgpCustomers);
+            this.Controls.Add(this.dgvCustomers);
             this.Controls.Add(this.label1);
             this.Name = "CustomerListForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lista de Clientes";
             this.Load += new System.EventHandler(this.CustomerListForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgpCustomers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,7 +126,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgpCustomers;
+        private System.Windows.Forms.DataGridView dgvCustomers;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn CNPJCPF;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewImageColumn Editar;

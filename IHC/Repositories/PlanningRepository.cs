@@ -40,6 +40,7 @@ namespace IHC.Repositories
         public void DeleteById(long id)
         {
             var planningToDelete = Context.Plannings.First(p => p.Id == id);
+            //planningToDelete.JobRole.Id = planningToDelete.JobRoleId;
             Context.Set<Planning>().Remove(planningToDelete);
             Context.SaveChanges();
         }

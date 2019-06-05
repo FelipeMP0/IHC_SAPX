@@ -2,12 +2,6 @@
 using IHC.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IHC
@@ -20,19 +14,43 @@ namespace IHC
         {
             InitializeComponent();
             _service = new CustomerService();
+            Activated += new EventHandler(CustomerListForm_Activated);
+        }
+
+        private void CustomerListForm_Activated(object sender, EventArgs e)
+        {
+            LoadToDataGridView();
         }
 
         private void CustomerListForm_Load(object sender, EventArgs e)
         {
-            loadToDataGridView();
+            LoadToDataGridView();
         }
 
-        private void loadToDataGridView()
+        private void LoadToDataGridView()
         {
-            IEnumerable<Customer> customers =_service.ReadAll();
+            _service = new CustomerService();
+            dgvCustomers.Rows.Clear();
+            IEnumerable<Customer> customers = _service.ReadAll();
             foreach (var customer in customers)
             {
-                dgpCustomers.Rows.Add(customer.Document, customer.Name, null, null);
+                dgvCustomers.Rows.Add(customer.Id, customer.Document, customer.Name, null, null);
+            }
+        }
+
+        private void DgpCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 4)
+            {
+                string id = dgvCustomers.SelectedCells[0].Value.ToString();
+                _service.DeleteById(int.Parse(id));
+                LoadToDataGridView();
+            }
+            else if (e.ColumnIndex == 3)
+            {
+                string id = dgvCustomers.SelectedCells[0].Value.ToString();
+                CustomerForm customerForm = new CustomerForm(long.Parse(id));
+                customerForm.ShowDialog();
             }
         }
     }

@@ -1,13 +1,6 @@
 ﻿using IHC.Models;
 using IHC.Services;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IHC
@@ -15,11 +8,17 @@ namespace IHC
     public partial class CustomerForm : Form
     {
         CustomerService _service;
+        private long? idToUpdate;
 
         public CustomerForm()
         {
             InitializeComponent();
             _service = new CustomerService();
+        }
+
+        public CustomerForm(long id) : this()
+        {
+            idToUpdate = id;
         }
 
         private void Label3_Click(object sender, EventArgs e)
@@ -42,9 +41,34 @@ namespace IHC
                 Email = txtEmail.Text
             };
 
-            _service.Create(customer);
+            if (idToUpdate != null)
+            {
+                customer.Id = Convert.ToInt64(idToUpdate);
+            }
+
+            if (customer.Id == 0)
+            {
+                _service.Create(customer);
+            }
+            else
+            {
+                _service.Update(customer);
+            }
+
             MessageBox.Show("Cliente salvo com sucesso", "Clientes", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             Close();
+        }
+
+        private void CustomerForm_Load(object sender, EventArgs e)
+        {
+            if (idToUpdate != null)
+            {
+                Customer customer = _service.ReadById(Convert.ToInt64(idToUpdate));
+                txtNome.Text = customer.Name;
+                txtCNPJ.Text = customer.Document;
+                txtEmail.Text = customer.Email;
+                txtTelefone.Text = customer.Phone;
+            }
         }
     }
 }

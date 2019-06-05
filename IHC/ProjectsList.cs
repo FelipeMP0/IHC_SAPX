@@ -14,6 +14,7 @@ namespace IHC
         CustomerService _customerService;
         ManagerService _managerService;
         PlanningService _planningService;
+
         public ProjectsList()
         {
             InitializeComponent();
@@ -70,15 +71,15 @@ namespace IHC
 
         private void ProjectsList_Load(object sender, EventArgs e)
         {
-            loadProjectToDateGridView();
+            LoadToDataGridView();
         }
 
         private void ProjectsList_Activated(object sender, EventArgs e)
         {
-            loadProjectToDateGridView();
+            LoadToDataGridView();
         }
 
-        private void loadProjectToDateGridView()
+        private void LoadToDataGridView()
         {
             dgvProjects.Rows.Clear();
             IEnumerable<Project> projects = _service.ReadAll();
@@ -115,7 +116,13 @@ namespace IHC
             {
                 string id = dgvProjects.SelectedCells[0].Value.ToString();
                 _service.DeleteById(int.Parse(id));
-                loadProjectToDateGridView();
+                LoadToDataGridView();
+            } else if (e.ColumnIndex == 4)
+            {
+                string id = dgvProjects.SelectedCells[0].Value.ToString();
+                Project project = _service.ReadById(long.Parse(id));
+                ProjectForm projectForm = new ProjectForm(project.Id);
+                projectForm.ShowDialog();
             }
         }
     }

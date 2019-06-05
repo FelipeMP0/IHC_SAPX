@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.dgpJobRoles = new System.Windows.Forms.DataGridView();
+            this.dgvJobRoles = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nível = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Editar = new System.Windows.Forms.DataGridViewImageColumn();
             this.Remover = new System.Windows.Forms.DataGridViewImageColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgpJobRoles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvJobRoles)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -48,18 +49,28 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Lista de Cargos";
             // 
-            // dgpJobRoles
+            // dgvJobRoles
             // 
-            this.dgpJobRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgpJobRoles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvJobRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvJobRoles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
             this.Nome,
             this.Nível,
             this.Editar,
             this.Remover});
-            this.dgpJobRoles.Location = new System.Drawing.Point(12, 68);
-            this.dgpJobRoles.Name = "dgpJobRoles";
-            this.dgpJobRoles.Size = new System.Drawing.Size(770, 355);
-            this.dgpJobRoles.TabIndex = 4;
+            this.dgvJobRoles.Location = new System.Drawing.Point(12, 68);
+            this.dgvJobRoles.MultiSelect = false;
+            this.dgvJobRoles.Name = "dgvJobRoles";
+            this.dgvJobRoles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvJobRoles.Size = new System.Drawing.Size(770, 355);
+            this.dgvJobRoles.TabIndex = 4;
+            this.dgvJobRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgpJobRoles_CellContentClick);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
             // 
             // Nome
             // 
@@ -99,14 +110,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dgpJobRoles);
+            this.Controls.Add(this.dgvJobRoles);
             this.Controls.Add(this.label1);
             this.Name = "JobRoleListForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lista de Cargos";
             this.Load += new System.EventHandler(this.JobRoleListForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgpJobRoles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvJobRoles)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,7 +126,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgpJobRoles;
+        private System.Windows.Forms.DataGridView dgvJobRoles;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nível;
         private System.Windows.Forms.DataGridViewImageColumn Editar;

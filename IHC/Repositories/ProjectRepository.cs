@@ -35,6 +35,10 @@ namespace IHC.Repositories
             projectToUpdate.State = project.State;
             projectToUpdate.Customer = project.Customer;
             projectToUpdate.Plannings = project.Plannings;
+            foreach (var p in projectToUpdate.Plannings)
+            {
+                p.ProjectId = projectToUpdate.Id;
+            }
             projectToUpdate.Manager = project.Manager;
             Context.Entry(projectToUpdate).State = EntityState.Modified;
             Context.SaveChanges();
