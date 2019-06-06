@@ -24,6 +24,11 @@ namespace IHC.Services
             _customerRepository.DeleteById(id);
         }
 
+        public bool existsWithDocument(string document)
+        {
+            return _customerRepository.existsWithDocument(document);
+        }
+
         public IEnumerable<Customer> ReadAll()
         {
             return _customerRepository.ReadAll();

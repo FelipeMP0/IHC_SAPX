@@ -40,17 +40,26 @@ namespace IHC
 
         private void DgpCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 4)
+            try
             {
-                string id = dgvCustomers.SelectedCells[0].Value.ToString();
-                _service.DeleteById(int.Parse(id));
-                LoadToDataGridView();
-            }
-            else if (e.ColumnIndex == 3)
+                if (e.ColumnIndex == 4)
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o cliente?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    {
+                        string id = dgvCustomers.SelectedCells[0].Value.ToString();
+                        _service.DeleteById(int.Parse(id));
+                        LoadToDataGridView();
+                    }
+                }
+                else if (e.ColumnIndex == 3)
+                {
+                    string id = dgvCustomers.SelectedCells[0].Value.ToString();
+                    CustomerForm customerForm = new CustomerForm(long.Parse(id));
+                    customerForm.ShowDialog();
+                }
+            } catch (Exception ex)
             {
-                string id = dgvCustomers.SelectedCells[0].Value.ToString();
-                CustomerForm customerForm = new CustomerForm(long.Parse(id));
-                customerForm.ShowDialog();
+
             }
         }
     }

@@ -166,6 +166,7 @@
             this.numReceita.Name = "numReceita";
             this.numReceita.Size = new System.Drawing.Size(374, 29);
             this.numReceita.TabIndex = 17;
+            this.numReceita.ThousandsSeparator = true;
             // 
             // label7
             // 

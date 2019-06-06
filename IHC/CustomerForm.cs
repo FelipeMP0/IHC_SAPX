@@ -33,6 +33,12 @@ namespace IHC
 
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
+            if (_service.existsWithDocument(txtCNPJ.Text))
+            {
+                MessageBox.Show("CPF ou CNPJ já cadastrado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
             Customer customer = new Customer()
             {
                 Name = txtNome.Text,

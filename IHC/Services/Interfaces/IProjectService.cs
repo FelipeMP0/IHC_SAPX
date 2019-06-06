@@ -1,4 +1,6 @@
-﻿using IHC.Models;
+﻿using IHC.Enums;
+using IHC.Models;
+using System;
 using System.Collections.Generic;
 
 namespace IHC.Services.Interfaces
@@ -10,5 +12,6 @@ namespace IHC.Services.Interfaces
         void DeleteById(long id);
         Project ReadById(long id);
         IEnumerable<Project> ReadAll();
+        IEnumerable<Project> ReadWithParameters(DateTime startDate, DateTime endDate, long customerId, ProjectState state);
     }
 }

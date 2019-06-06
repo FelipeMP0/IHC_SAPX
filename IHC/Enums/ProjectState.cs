@@ -9,7 +9,8 @@ namespace IHC.Enums
         IN_NEGOCIATION,
 
         [Description("Contratado")]
-        CONTRACTED
+        CONTRACTED,
+        NULL
     }
 
     public static class ProjectStateExtensions

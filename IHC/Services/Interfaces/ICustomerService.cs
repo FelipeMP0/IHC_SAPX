@@ -10,5 +10,6 @@ namespace IHC.Services.Interfaces
         void DeleteById(long id);
         Customer ReadById(long id);
         IEnumerable<Customer> ReadAll();
+        bool existsWithDocument(string document);
     }
 }

@@ -1,7 +1,9 @@
-﻿using IHC.Models;
+﻿using IHC.Enums;
+using IHC.Models;
 using IHC.Repositories;
 using IHC.Repositories.Interfaces;
 using IHC.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace IHC.Services
@@ -28,6 +30,11 @@ namespace IHC.Services
         public IEnumerable<Project> ReadAll()
         {
             return _projectRepository.ReadAll();
+        }
+
+        public IEnumerable<Project> ReadWithParameters(DateTime startDate, DateTime endDate, long customerId, ProjectState state)
+        {
+            return _projectRepository.ReadWithParameters(startDate, endDate, customerId, state);
         }
 
         public Project ReadById(long id)

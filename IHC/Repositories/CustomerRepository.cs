@@ -55,6 +55,11 @@ namespace IHC.Repositories
             return Context.Customers.OrderBy(c => c.Id);
         }
 
+        public bool existsWithDocument(string document)
+        {
+            return Context.Customers.FirstOrDefault(c => c.Document.Trim() == document.Trim()) != null;
+        }
+
         public void Dispose()
         {
             Context.Dispose();

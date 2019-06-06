@@ -14,6 +14,8 @@ namespace IHC
         CustomerService _customerService;
         ManagerService _managerService;
         PlanningService _planningService;
+        DateTime defaultStartTime;
+        DateTime defaultEndTime;
 
         public ProjectsList()
         {
@@ -23,6 +25,10 @@ namespace IHC
             _managerService = new ManagerService();
             _planningService = new PlanningService();
             Activated += new EventHandler(ProjectsList_Activated);
+            defaultStartTime = DateTime.Now;
+            defaultEndTime = DateTime.Now.AddMonths(1);
+            dtpInicio.Value = defaultStartTime;
+            dtpFim.Value = defaultEndTime;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -71,18 +77,35 @@ namespace IHC
 
         private void ProjectsList_Load(object sender, EventArgs e)
         {
+            LoadStateToComboBox();
+            LoadCustomersToComboBox();
             LoadToDataGridView();
         }
 
         private void ProjectsList_Activated(object sender, EventArgs e)
         {
+            LoadStateToComboBox();
+            LoadCustomersToComboBox();
             LoadToDataGridView();
         }
 
         private void LoadToDataGridView()
         {
+            _service = new ProjectService();
+
             dgvProjects.Rows.Clear();
-            IEnumerable<Project> projects = _service.ReadAll();
+
+            long customerId = cbCliente.Text != "" ? long.Parse(cbCliente.Text.Split(' ')[0]) : 0;
+            ProjectState state;
+            try
+            {
+                state = cbEstado.Text == "" || cbEstado.Text == "Todos os Estados" ? ProjectState.NULL : ProjectStateExtensions.GetValueFromDescription<ProjectState>(cbEstado.Text);
+            } 
+            catch (ArgumentException e)
+            {
+                state = ProjectState.NULL;
+            }
+            IEnumerable <Project> projects = _service.ReadWithParameters(dtpInicio.Value, dtpFim.Value, customerId, state);
 
             if (projects.Count() != 0)
             {
@@ -95,35 +118,60 @@ namespace IHC
             }
         }
 
+        private void LoadStateToComboBox()
+        {
+            cbEstado.Items.Clear();
+            cbEstado.Items.Add(ProjectStateExtensions.ToDescriptionString(ProjectState.IN_NEGOCIATION));
+            cbEstado.Items.Add(ProjectStateExtensions.ToDescriptionString(ProjectState.CONTRACTED));
+            cbEstado.Items.Add("Todos os Estados");
+        }
+
+        private void LoadCustomersToComboBox()
+        {
+            cbCliente.Items.Clear();
+            _customerService = new CustomerService();
+            cbCliente.Items.Clear();
+            IEnumerable<Customer> customers = _customerService.ReadAll();
+            foreach (var customer in customers)
+            {
+                cbCliente.Items.Add(customer.Id + " " + customer.Name);
+            }
+        }
+
         private void BtnDetalhes_Click(object sender, EventArgs e)
         {
-            if (dgvProjects.SelectedCells.Count > 0)
-            {
-                string id = dgvProjects.SelectedCells[0].Value.ToString();
-                Project project = _service.ReadById(int.Parse(id));
-
-                project.Customer = _customerService.ReadById(project.CustomerId);
-                project.Manager = _managerService.ReadById(project.ManagerId);
-                project.Plannings = _planningService.ReadAllByProjectId(project.Id).ToList();
-
-                //Mostrar detalhes
-            }
         }
 
         private void DgvProjects_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 5)
+            try
             {
-                string id = dgvProjects.SelectedCells[0].Value.ToString();
-                _service.DeleteById(int.Parse(id));
-                LoadToDataGridView();
-            } else if (e.ColumnIndex == 4)
-            {
-                string id = dgvProjects.SelectedCells[0].Value.ToString();
-                Project project = _service.ReadById(long.Parse(id));
-                ProjectForm projectForm = new ProjectForm(project.Id);
-                projectForm.ShowDialog();
+                if (e.ColumnIndex == 5)
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o projeto?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    {
+                        string id = dgvProjects.SelectedCells[0].Value.ToString();
+                        _service.DeleteById(int.Parse(id));
+                        LoadToDataGridView();
+                    }
+                }
+                else if (e.ColumnIndex == 4)
+                {
+                    string id = dgvProjects.SelectedCells[0].Value.ToString();
+                    Project project = _service.ReadById(long.Parse(id));
+                    ProjectForm projectForm = new ProjectForm(project.Id);
+                    projectForm.ShowDialog();
+                }
             }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void BtnConsultar_Click(object sender, EventArgs e)
+        {
+            LoadToDataGridView();
         }
     }
 }

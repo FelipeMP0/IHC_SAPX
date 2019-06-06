@@ -1,4 +1,5 @@
 ﻿using IHC.Contexts;
+using IHC.Enums;
 using IHC.Models;
 using IHC.Repositories.Interfaces;
 using System;
@@ -49,10 +50,7 @@ namespace IHC.Repositories
         public void DeleteById(long id)
         {
             var projectToDelete = Context.Projects.First(p => p.Id == id);
-            projectToDelete.Customer = null;
-            projectToDelete.Manager = null;
-            projectToDelete.Plannings = null;
-            Context.Entry(projectToDelete).State = EntityState.Deleted;
+            Context.Set<Project>().Remove(projectToDelete);
             Context.SaveChanges();
         }
 
@@ -64,6 +62,31 @@ namespace IHC.Repositories
         public IEnumerable<Project> ReadAll()
         {
             return Context.Projects;
+        }
+
+        public IEnumerable<Project> ReadWithParameters(DateTime startDate, DateTime endDate, long customerId, ProjectState state)
+        {
+            startDate = startDate.AddDays(-1);
+            if (customerId <= 0 && state == ProjectState.NULL)
+            {
+                return Context.Projects.Where(p => p.StartDate >= startDate && p.EndDate <= endDate);
+            }
+            else if (customerId > 0 && state != ProjectState.NULL)
+            {
+                return Context.Projects.Where(p => p.StartDate >= startDate && p.EndDate <= endDate && p.CustomerId == customerId && p.State == state);
+            }
+            else if (customerId > 0 && state == ProjectState.NULL)
+            {
+                return Context.Projects.Where(p => p.StartDate >= startDate && p.EndDate <= endDate && p.CustomerId == customerId);
+            }
+            else if (customerId <= 0 && state != ProjectState.NULL)
+            {
+                return Context.Projects.Where(p => p.StartDate >= startDate && p.EndDate <= endDate && p.State == state);
+            }
+            else
+            {
+                return Context.Projects;
+            }
         }
 
         public void Dispose()

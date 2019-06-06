@@ -45,6 +45,8 @@ namespace IHC
             }
 
             Activated += new EventHandler(ProjectForm_Activated);
+            numReceita.DecimalPlaces = 2;
+            numReceita.Maximum = 999999;
         }
 
         public ProjectForm(long id) : this()
@@ -174,7 +176,7 @@ namespace IHC
             }
         }
 
-        private void loadStateToComboBox()
+        private void LoadStateToComboBox()
         {
             cbEstado.Items.Add(ProjectStateExtensions.ToDescriptionString(ProjectState.IN_NEGOCIATION));
             cbEstado.Items.Add(ProjectStateExtensions.ToDescriptionString(ProjectState.CONTRACTED));
@@ -184,7 +186,7 @@ namespace IHC
         {
             LoadCustomersToComboBox();
             LoadJobRolesToComboBox();
-            loadStateToComboBox();
+            LoadStateToComboBox();
         }
 
         private void BtnAdicionarRecurso_Click(object sender, EventArgs e)

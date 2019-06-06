@@ -40,17 +40,27 @@ namespace IHC
 
         private void DgpJobRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 4)
+            try
             {
-                string id = dgvJobRoles.SelectedCells[0].Value.ToString();
-                _service.DeleteById(int.Parse(id));
-                LoadToDataGridView();
-            } else if (e.ColumnIndex == 3)
+                if (e.ColumnIndex == 4)
+                {
+                    if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o cargo?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    {
+                        string id = dgvJobRoles.SelectedCells[0].Value.ToString();
+                        _service.DeleteById(int.Parse(id));
+                        LoadToDataGridView();
+                    }
+                }
+                else if (e.ColumnIndex == 3)
+                {
+                    string id = dgvJobRoles.SelectedCells[0].Value.ToString();
+                    JobRole jobRole = _service.ReadById(long.Parse(id));
+                    JobRoleForm jobRoleForm = new JobRoleForm(jobRole.Id);
+                    jobRoleForm.ShowDialog();
+                }
+            } catch (Exception ex)
             {
-                string id = dgvJobRoles.SelectedCells[0].Value.ToString();
-                JobRole jobRole = _service.ReadById(long.Parse(id));
-                JobRoleForm jobRoleForm = new JobRoleForm(jobRole.Id);
-                jobRoleForm.ShowDialog();
+
             }
         }
     }
