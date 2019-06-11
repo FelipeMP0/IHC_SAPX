@@ -38,5 +38,10 @@ namespace IHC.Services
         {
             return _planningRepository.Update(planning);
         }
+
+        public bool ExistsWithJobRole(int id)
+        {
+            return _planningRepository.ExistsWithJobRole(id);
+        }
     }
 }

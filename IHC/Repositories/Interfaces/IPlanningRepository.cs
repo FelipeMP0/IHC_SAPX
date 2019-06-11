@@ -10,5 +10,6 @@ namespace IHC.Repositories.Interfaces
         void DeleteById(long id);
         Planning ReadById(long id);
         IEnumerable<Planning> ReadAllByProjectId(long projectId);
+        bool ExistsWithJobRole(int id);
     }
 }

@@ -8,12 +8,13 @@ namespace IHC
 {
     public partial class JobRoleListForm : Form
     {
-        JobRoleService _service;
-
+        private JobRoleService _service;
+        private PlanningService _planningService;
         public JobRoleListForm()
         {
             InitializeComponent();
             _service = new JobRoleService();
+            _planningService = new PlanningService();
             Activated += new EventHandler(JobRoleListForm_Activated);
         }
 
@@ -46,9 +47,17 @@ namespace IHC
                 {
                     if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o cargo?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                     {
-                        string id = dgvJobRoles.SelectedCells[0].Value.ToString();
-                        _service.DeleteById(int.Parse(id));
-                        LoadToDataGridView();
+                        string id = dgvJobRoles.Rows[e.RowIndex].Cells[0].Value.ToString();
+                        int idI = int.Parse(id);
+                        if (!_planningService.ExistsWithJobRole(idI))
+                        {
+                            _service.DeleteById(idI);
+                            LoadToDataGridView();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Cargos associados a projetos não podem ser excluídos!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 else if (e.ColumnIndex == 3)
@@ -58,7 +67,8 @@ namespace IHC
                     JobRoleForm jobRoleForm = new JobRoleForm(jobRole.Id);
                     jobRoleForm.ShowDialog();
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
 
             }

@@ -8,12 +8,13 @@ namespace IHC
 {
     public partial class CustomerListForm : Form
     {
-        public CustomerService _service;
-
+        private CustomerService _service;
+        private ProjectService _projectService;
         public CustomerListForm()
         {
             InitializeComponent();
             _service = new CustomerService();
+            _projectService = new ProjectService();
             Activated += new EventHandler(CustomerListForm_Activated);
         }
 
@@ -46,9 +47,17 @@ namespace IHC
                 {
                     if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o cliente?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                     {
-                        string id = dgvCustomers.SelectedCells[0].Value.ToString();
-                        _service.DeleteById(int.Parse(id));
-                        LoadToDataGridView();
+                        string id = dgvCustomers.Rows[e.RowIndex].Cells[0].Value.ToString();
+                        int idI = int.Parse(id);
+                        if (!_projectService.ExistsWithCustomerId(idI))
+                        {
+                            _service.DeleteById(idI);
+                            LoadToDataGridView();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Clientes associados a projetos não podem ser excluídos!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 else if (e.ColumnIndex == 3)
@@ -57,7 +66,8 @@ namespace IHC
                     CustomerForm customerForm = new CustomerForm(long.Parse(id));
                     customerForm.ShowDialog();
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
 
             }

@@ -35,7 +35,7 @@ namespace IHC.Enums
                         return (T)field.GetValue(null);
                 }
             }
-            throw new ArgumentException("Not found.", "description");
+            return default(T);
         }
 
         public static string ToDescriptionString(this ProjectState val)

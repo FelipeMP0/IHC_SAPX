@@ -100,12 +100,12 @@ namespace IHC
             try
             {
                 state = cbEstado.Text == "" || cbEstado.Text == "Todos os Estados" ? ProjectState.NULL : ProjectStateExtensions.GetValueFromDescription<ProjectState>(cbEstado.Text);
-            } 
+            }
             catch (ArgumentException e)
             {
                 state = ProjectState.NULL;
             }
-            IEnumerable <Project> projects = _service.ReadWithParameters(dtpInicio.Value, dtpFim.Value, customerId, state);
+            IEnumerable<Project> projects = _service.ReadWithParameters(dtpInicio.Value, dtpFim.Value, customerId, state);
 
             if (projects.Count() != 0)
             {
@@ -150,7 +150,7 @@ namespace IHC
                 {
                     if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o projeto?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                     {
-                        string id = dgvProjects.SelectedCells[0].Value.ToString();
+                        string id = dgvProjects.Rows[e.RowIndex].Cells[0].Value.ToString();
                         _service.DeleteById(int.Parse(id));
                         LoadToDataGridView();
                     }

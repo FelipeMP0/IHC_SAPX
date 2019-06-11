@@ -46,5 +46,10 @@ namespace IHC.Services
         {
             return _projectRepository.Update(project);
         }
+
+        public bool ExistsWithCustomerId(int id)
+        {
+            return _projectRepository.ExistsWithCustomerId(id);
+        }
     }
 }

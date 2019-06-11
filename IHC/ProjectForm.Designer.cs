@@ -97,9 +97,9 @@
             this.label3.ForeColor = System.Drawing.SystemColors.WindowText;
             this.label3.Location = new System.Drawing.Point(14, 207);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(169, 24);
+            this.label3.Size = new System.Drawing.Size(155, 24);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Receita Estimatada";
+            this.label3.Text = "Receita Estimada";
             // 
             // dtpInicio
             // 

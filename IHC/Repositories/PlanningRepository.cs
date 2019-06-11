@@ -59,5 +59,10 @@ namespace IHC.Repositories
         {
             Context.Dispose();
         }
+
+        public bool ExistsWithJobRole(int id)
+        {
+            return Context.Plannings.FirstOrDefault(p => p.JobRoleId == id) != null ? true : false;
+        }
     }
 }

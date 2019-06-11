@@ -45,7 +45,7 @@ namespace IHC.Repositories
 
         public JobRole ReadById(long id)
         {
-            return Context.JobRoles.First(jb => jb.Id == id);
+            return Context.JobRoles.FirstOrDefault(jb => jb.Id == id);
         }
 
         public IEnumerable<JobRole> ReadAll()

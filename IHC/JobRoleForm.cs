@@ -29,8 +29,22 @@ namespace IHC
             }
         }
 
+        private void ValidateData()
+        {
+            if (txtCargo.Text.Trim() == "")
+            {
+                MessageBox.Show("Nome do cargo é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            if (txtNivel.Text.Trim() == "")
+            {
+                MessageBox.Show("Nível do cargo é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
         private void BtnSalvar_Click(object sender, EventArgs e)
         {
+            ValidateData();
             JobRole jobRole = new JobRole()
             {
                 Name = txtCargo.Text,
@@ -45,7 +59,8 @@ namespace IHC
             if (jobRole.Id == 0)
             {
                 _service.Create(jobRole);
-            } else
+            }
+            else
             {
                 _service.Update(jobRole);
             }

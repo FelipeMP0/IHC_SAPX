@@ -31,8 +31,27 @@ namespace IHC
 
         }
 
+        private void ValidateData()
+        {
+            if (txtCNPJ.Text.Trim() == "")
+            {
+                MessageBox.Show("CNPJ/CPF do cliente é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            if (txtNome.Text.Trim() == "")
+            {
+                MessageBox.Show("Nome do cliente é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            if (txtTelefone.Text.Trim() == "")
+            {
+                MessageBox.Show("Telefone do cliente é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
+            ValidateData();
             if (_service.existsWithDocument(txtCNPJ.Text))
             {
                 MessageBox.Show("CPF ou CNPJ já cadastrado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);

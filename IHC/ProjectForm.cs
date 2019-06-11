@@ -47,6 +47,7 @@ namespace IHC
             Activated += new EventHandler(ProjectForm_Activated);
             numReceita.DecimalPlaces = 2;
             numReceita.Maximum = 999999;
+            numHoras.Minimum = 1;
         }
 
         public ProjectForm(long id) : this()
@@ -62,10 +63,10 @@ namespace IHC
                 txtNome.Text = project.Name;
                 dtpInicio.Value = project.StartDate;
                 dtpFim.Value = project.EndDate;
-                numReceita.Value = (decimal) project.ExpectedReveneu;
+                numReceita.Value = (decimal)project.ExpectedReveneu;
                 cbEstado.Text = ProjectStateExtensions.ToDescriptionString(project.State);
                 cbCliente.Text = project.Customer.Id + " " + project.Customer.Name;
-                
+
                 if (project.Plannings != null)
                 {
                     foreach (var planning in project.Plannings)
@@ -98,62 +99,125 @@ namespace IHC
             jobRoleForm.ShowDialog();
         }
 
+        private void ValidateData()
+        {
+            if (txtNome.Text.Trim() == "")
+            {
+                MessageBox.Show("Nome do projeto é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                throw new Exception();
+            }
+
+            if (cbEstado.Text.Trim() == "")
+            {
+                MessageBox.Show("Estado atual do projeto é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                throw new Exception();
+            }
+
+            if (cbCliente.Text.Trim() == "")
+            {
+                MessageBox.Show("Cliente é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                throw new Exception();
+            }
+
+            if (dgvRecursos.Rows.Count == 1)
+            {
+                MessageBox.Show("Pelo menos um cargo deve ser planejado para o projeto", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                throw new Exception();
+            }
+        }
+
         private void BtnSalvar_Click(object sender, EventArgs e)
         {
-            Customer customer = _customerService.ReadById(int.Parse(cbCliente.Text.Split(' ')[0]));
-            Project project = new Project()
+            try
             {
-                Name = txtNome.Text,
-                StartDate = dtpInicio.Value,
-                EndDate = dtpFim.Value,
-                ExpectedReveneu = (double)numReceita.Value,
-                State = ProjectStateExtensions.GetValueFromDescription<ProjectState>(cbEstado.Text),
-                ManagerId = defaultManager.Id,
-                CustomerId = customer.Id
-            };
-
-            if (idToUpdate != null)
+                ValidateData();
+            }
+            catch (Exception)
             {
-                project.Id = Convert.ToInt64(idToUpdate);
+                return;
             }
 
-            List<Planning> plannings = new List<Planning>();
-
-            foreach (DataGridViewRow row in dgvRecursos.Rows)
+            Customer customer = null;
+            try
             {
-                long jobRoleId = Convert.ToInt64(row.Cells[0].Value);
-                if (jobRoleId != 0)
+                customer = _customerService.ReadById(int.Parse(cbCliente.Text.Split(' ')[0]));
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Cliente inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (customer != null)
+            {
+                ProjectState projectState;
+
+                projectState = ProjectStateExtensions.GetValueFromDescription<ProjectState>(cbEstado.Text);
+
+                Project project = new Project()
                 {
-                    JobRole jobRole = _jobRoleService.ReadById(jobRoleId);
+                    Name = txtNome.Text,
+                    StartDate = dtpInicio.Value,
+                    EndDate = dtpFim.Value,
+                    ExpectedReveneu = (double)numReceita.Value,
+                    State = projectState,
+                    ManagerId = defaultManager.Id,
+                    CustomerId = customer.Id
+                };
 
-                    Planning planning = new Planning()
-                    {
-                        JobRoleId = jobRole.Id,
-                        ProjectId = project.Id,
-                        PlannedHours = Convert.ToInt32(row.Cells[3].Value)
-                    };
-
-                    plannings.Add(planning);
+                if (idToUpdate != null)
+                {
+                    project.Id = Convert.ToInt64(idToUpdate);
                 }
-            }
-            project.Plannings = plannings;
 
-            if (idToUpdate == null)
-            {
-                _service.Create(project);
+                List<Planning> plannings = new List<Planning>();
+
+                foreach (DataGridViewRow row in dgvRecursos.Rows)
+                {
+                    long jobRoleId = Convert.ToInt64(row.Cells[0].Value);
+                    if (jobRoleId != 0)
+                    {
+                        JobRole jobRole = _jobRoleService.ReadById(jobRoleId);
+
+                        if (jobRole == null)
+                        {
+                            MessageBox.Show("Cargo não encontrado: " + row.Cells[1], "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        Planning planning = new Planning()
+                        {
+                            JobRoleId = jobRole.Id,
+                            ProjectId = project.Id,
+                            PlannedHours = Convert.ToInt32(row.Cells[3].Value)
+                        };
+
+                        plannings.Add(planning);
+                    }
+                }
+                project.Plannings = plannings;
+
+                if (idToUpdate == null)
+                {
+                    _service.Create(project);
+                }
+                else
+                {
+                    if (planningsToDelete != null)
+                    {
+                        foreach (var planning in planningsToDelete)
+                        {
+                            _planningService.DeleteById(planning.Id);
+                        }
+                    }
+                    _service.Update(project);
+                }
+                MessageBox.Show("Projeto salvo com sucesso", "Projetos", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                Close();
             }
             else
             {
-                if (planningsToDelete != null) { 
-                    foreach (var planning in planningsToDelete)
-                    {
-                        _planningService.DeleteById(planning.Id);
-                    }
-                }
-                _service.Update(project);
+                MessageBox.Show("Cliente não encontrado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            MessageBox.Show("Projeto salvo com sucesso", "Projetos", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            Close();
         }
 
         private void LoadCustomersToComboBox()
@@ -197,9 +261,16 @@ namespace IHC
 
         private void DgvRecursos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 4)
+            try
             {
-                dgvRecursos.Rows.RemoveAt(dgvRecursos.SelectedRows[0].Index);
+                if (e.ColumnIndex == 4)
+                {
+                    dgvRecursos.Rows.RemoveAt(dgvRecursos.SelectedRows[0].Index);
+                }
+            }
+            catch (Exception)
+            {
+
             }
         }
     }

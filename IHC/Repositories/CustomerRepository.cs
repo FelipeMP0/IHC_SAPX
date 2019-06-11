@@ -47,7 +47,7 @@ namespace IHC.Repositories
 
         public Customer ReadById(long id)
         {
-            return Context.Customers.First(c => c.Id == id);
+            return Context.Customers.FirstOrDefault(c => c.Id == id);
         }
 
         public IEnumerable<Customer> ReadAll()

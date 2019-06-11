@@ -93,5 +93,10 @@ namespace IHC.Repositories
         {
             Context.Dispose();
         }
+
+        public bool ExistsWithCustomerId(int id)
+        {
+            return Context.Projects.FirstOrDefault(p => p.CustomerId == id) != null ? true : false;
+        }
     }
 }
