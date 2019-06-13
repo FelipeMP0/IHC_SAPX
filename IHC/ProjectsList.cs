@@ -25,8 +25,8 @@ namespace IHC
             _managerService = new ManagerService();
             _planningService = new PlanningService();
             Activated += new EventHandler(ProjectsList_Activated);
-            defaultStartTime = DateTime.Now;
-            defaultEndTime = DateTime.Now.AddMonths(1);
+            defaultStartTime = DateTime.Now.AddMonths(-1);
+            defaultEndTime = DateTime.Now;
             dtpInicio.Value = defaultStartTime;
             dtpFim.Value = defaultEndTime;
         }
@@ -54,7 +54,9 @@ namespace IHC
 
         private void Button4_Click(object sender, EventArgs e)
         {
+            Reports reports = new Reports();
 
+            reports.ShowDialog();
         }
 
         private void Button1_Click_1(object sender, EventArgs e)

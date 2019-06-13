@@ -69,19 +69,19 @@ namespace IHC.Repositories
             startDate = startDate.AddDays(-1);
             if (customerId <= 0 && state == ProjectState.NULL)
             {
-                return Context.Projects.Where(p => p.StartDate >= startDate && p.EndDate <= endDate);
+                return Context.Projects.Where(p => p.StartDate >= startDate && p.StartDate <= endDate);
             }
             else if (customerId > 0 && state != ProjectState.NULL)
             {
-                return Context.Projects.Where(p => p.StartDate >= startDate && p.EndDate <= endDate && p.CustomerId == customerId && p.State == state);
+                return Context.Projects.Where(p => p.StartDate >= startDate && p.StartDate <= endDate && p.CustomerId == customerId && p.State == state);
             }
             else if (customerId > 0 && state == ProjectState.NULL)
             {
-                return Context.Projects.Where(p => p.StartDate >= startDate && p.EndDate <= endDate && p.CustomerId == customerId);
+                return Context.Projects.Where(p => p.StartDate >= startDate && p.StartDate <= endDate && p.CustomerId == customerId);
             }
             else if (customerId <= 0 && state != ProjectState.NULL)
             {
-                return Context.Projects.Where(p => p.StartDate >= startDate && p.EndDate <= endDate && p.State == state);
+                return Context.Projects.Where(p => p.StartDate >= startDate && p.StartDate <= endDate && p.State == state);
             }
             else
             {
