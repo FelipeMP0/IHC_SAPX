@@ -176,6 +176,11 @@ namespace IHC
 
         private void BtnConsultar_Click(object sender, EventArgs e)
         {
+            if (dtpInicio.Value.Date.CompareTo(dtpFim.Value.Date) > 0)
+            {
+                MessageBox.Show("Data final deve ser após a data inicial", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             LoadToDataGridView();
         }
     }
