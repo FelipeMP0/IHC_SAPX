@@ -45,18 +45,21 @@ namespace IHC
             {
                 if (e.ColumnIndex == 4)
                 {
-                    if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o cargo?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    string id = dgvJobRoles.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    if (id.Trim() != "")
                     {
-                        string id = dgvJobRoles.Rows[e.RowIndex].Cells[0].Value.ToString();
-                        int idI = int.Parse(id);
-                        if (!_planningService.ExistsWithJobRole(idI))
+                        if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o cargo?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                         {
-                            _service.DeleteById(idI);
-                            LoadToDataGridView();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Cargos associados a projetos não podem ser excluídos!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            int idI = int.Parse(id);
+                            if (!_planningService.ExistsWithJobRole(idI))
+                            {
+                                _service.DeleteById(idI);
+                                LoadToDataGridView();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Cargos associados a projetos não podem ser excluídos!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
                 }

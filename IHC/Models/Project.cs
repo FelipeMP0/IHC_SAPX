@@ -18,6 +18,7 @@ namespace IHC.Models
         public DateTime StartDate { get; set; }
         [Required]
         public DateTime EndDate { get; set; }
+        public string Description { get; set; }
         [Required]
         public double ExpectedReveneu { get; set; }
         [Required]

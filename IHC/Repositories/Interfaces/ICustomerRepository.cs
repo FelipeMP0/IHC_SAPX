@@ -11,6 +11,6 @@ namespace IHC.Repositories.Interfaces
         Customer ReadById(long id);
         IEnumerable<Customer> ReadAll();
 
-        bool existsWithDocument(string document);
+        Customer existsWithDocument(string document);
     }
 }

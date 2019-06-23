@@ -31,6 +31,7 @@ namespace IHC.Repositories
             planningToUpdate.JobRole = planning.JobRole;
             planningToUpdate.Project = planning.Project;
             planningToUpdate.PlannedHours = planning.PlannedHours;
+            planningToUpdate.Quantity = planning.Quantity;
             Context.Entry(planningToUpdate).State = EntityState.Modified;
             Context.SaveChanges();
 
@@ -40,7 +41,6 @@ namespace IHC.Repositories
         public void DeleteById(long id)
         {
             var planningToDelete = Context.Plannings.First(p => p.Id == id);
-            //planningToDelete.JobRole.Id = planningToDelete.JobRoleId;
             Context.Set<Planning>().Remove(planningToDelete);
             Context.SaveChanges();
         }

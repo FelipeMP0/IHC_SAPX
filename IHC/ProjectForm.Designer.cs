@@ -49,15 +49,21 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.dgvRecursos = new System.Windows.Forms.DataGridView();
+            this.btnSalvar = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtDescricao = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.numQuantidade = new System.Windows.Forms.NumericUpDown();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cargo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nível = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HorasNecessárias = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remover = new System.Windows.Forms.DataGridViewImageColumn();
-            this.btnSalvar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numReceita)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHoras)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecursos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numQuantidade)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -95,7 +101,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label3.Location = new System.Drawing.Point(14, 207);
+            this.label3.Location = new System.Drawing.Point(14, 379);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(155, 24);
             this.label3.TabIndex = 10;
@@ -144,7 +150,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label6.Location = new System.Drawing.Point(450, 207);
+            this.label6.Location = new System.Drawing.Point(450, 379);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(68, 24);
             this.label6.TabIndex = 15;
@@ -154,7 +160,7 @@
             // 
             this.cbEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbEstado.FormattingEnabled = true;
-            this.cbEstado.Location = new System.Drawing.Point(454, 231);
+            this.cbEstado.Location = new System.Drawing.Point(454, 403);
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(374, 32);
             this.cbEstado.TabIndex = 16;
@@ -162,7 +168,7 @@
             // numReceita
             // 
             this.numReceita.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numReceita.Location = new System.Drawing.Point(18, 235);
+            this.numReceita.Location = new System.Drawing.Point(18, 407);
             this.numReceita.Name = "numReceita";
             this.numReceita.Size = new System.Drawing.Size(374, 29);
             this.numReceita.TabIndex = 17;
@@ -173,7 +179,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label7.Location = new System.Drawing.Point(14, 284);
+            this.label7.Location = new System.Drawing.Point(14, 456);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(68, 24);
             this.label7.TabIndex = 18;
@@ -183,7 +189,7 @@
             // 
             this.cbCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCliente.FormattingEnabled = true;
-            this.cbCliente.Location = new System.Drawing.Point(18, 312);
+            this.cbCliente.Location = new System.Drawing.Point(18, 484);
             this.cbCliente.Name = "cbCliente";
             this.cbCliente.Size = new System.Drawing.Size(374, 32);
             this.cbCliente.TabIndex = 19;
@@ -193,7 +199,7 @@
             this.btnIncluir.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.btnIncluir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIncluir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnIncluir.Location = new System.Drawing.Point(454, 307);
+            this.btnIncluir.Location = new System.Drawing.Point(454, 479);
             this.btnIncluir.Name = "btnIncluir";
             this.btnIncluir.Size = new System.Drawing.Size(265, 37);
             this.btnIncluir.TabIndex = 20;
@@ -205,7 +211,7 @@
             // 
             this.cbRecurso.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbRecurso.FormattingEnabled = true;
-            this.cbRecurso.Location = new System.Drawing.Point(18, 402);
+            this.cbRecurso.Location = new System.Drawing.Point(18, 574);
             this.cbRecurso.Name = "cbRecurso";
             this.cbRecurso.Size = new System.Drawing.Size(374, 32);
             this.cbRecurso.TabIndex = 21;
@@ -213,7 +219,7 @@
             // numHoras
             // 
             this.numHoras.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numHoras.Location = new System.Drawing.Point(454, 403);
+            this.numHoras.Location = new System.Drawing.Point(558, 575);
             this.numHoras.Name = "numHoras";
             this.numHoras.Size = new System.Drawing.Size(158, 29);
             this.numHoras.TabIndex = 22;
@@ -223,7 +229,7 @@
             this.btnAdicionarRecurso.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.btnAdicionarRecurso.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdicionarRecurso.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnAdicionarRecurso.Location = new System.Drawing.Point(716, 395);
+            this.btnAdicionarRecurso.Location = new System.Drawing.Point(722, 569);
             this.btnAdicionarRecurso.Name = "btnAdicionarRecurso";
             this.btnAdicionarRecurso.Size = new System.Drawing.Size(112, 37);
             this.btnAdicionarRecurso.TabIndex = 23;
@@ -236,7 +242,7 @@
             this.btnNovoRecurso.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.btnNovoRecurso.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNovoRecurso.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnNovoRecurso.Location = new System.Drawing.Point(18, 440);
+            this.btnNovoRecurso.Location = new System.Drawing.Point(18, 612);
             this.btnNovoRecurso.Name = "btnNovoRecurso";
             this.btnNovoRecurso.Size = new System.Drawing.Size(374, 37);
             this.btnNovoRecurso.TabIndex = 24;
@@ -249,7 +255,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label8.Location = new System.Drawing.Point(14, 375);
+            this.label8.Location = new System.Drawing.Point(14, 547);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(166, 24);
             this.label8.TabIndex = 25;
@@ -260,7 +266,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label9.Location = new System.Drawing.Point(450, 375);
+            this.label9.Location = new System.Drawing.Point(554, 547);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(165, 24);
             this.label9.TabIndex = 26;
@@ -273,15 +279,68 @@
             this.Id,
             this.Cargo,
             this.Nível,
+            this.Quantidade,
             this.HorasNecessárias,
             this.Remover});
-            this.dgvRecursos.Location = new System.Drawing.Point(18, 496);
+            this.dgvRecursos.Location = new System.Drawing.Point(18, 669);
             this.dgvRecursos.MultiSelect = false;
             this.dgvRecursos.Name = "dgvRecursos";
             this.dgvRecursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRecursos.Size = new System.Drawing.Size(810, 207);
             this.dgvRecursos.TabIndex = 27;
             this.dgvRecursos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvRecursos_CellContentClick);
+            // 
+            // btnSalvar
+            // 
+            this.btnSalvar.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalvar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSalvar.Location = new System.Drawing.Point(18, 882);
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Size = new System.Drawing.Size(810, 37);
+            this.btnSalvar.TabIndex = 28;
+            this.btnSalvar.Text = "Salvar e Finalizar";
+            this.btnSalvar.UseVisualStyleBackColor = false;
+            this.btnSalvar.Click += new System.EventHandler(this.BtnSalvar_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.label10.Location = new System.Drawing.Point(14, 196);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(94, 24);
+            this.label10.TabIndex = 29;
+            this.label10.Text = "Descrição";
+            // 
+            // txtDescricao
+            // 
+            this.txtDescricao.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescricao.Location = new System.Drawing.Point(18, 224);
+            this.txtDescricao.Multiline = true;
+            this.txtDescricao.Name = "txtDescricao";
+            this.txtDescricao.Size = new System.Drawing.Size(810, 142);
+            this.txtDescricao.TabIndex = 30;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.label11.Location = new System.Drawing.Point(394, 547);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(108, 24);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "Quantidade";
+            // 
+            // numQuantidade
+            // 
+            this.numQuantidade.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numQuantidade.Location = new System.Drawing.Point(398, 575);
+            this.numQuantidade.Name = "numQuantidade";
+            this.numQuantidade.Size = new System.Drawing.Size(158, 29);
+            this.numQuantidade.TabIndex = 31;
             // 
             // Id
             // 
@@ -295,14 +354,20 @@
             this.Cargo.Frozen = true;
             this.Cargo.HeaderText = "Cargo";
             this.Cargo.Name = "Cargo";
-            this.Cargo.Width = 300;
+            this.Cargo.Width = 225;
             // 
             // Nível
             // 
             this.Nível.Frozen = true;
             this.Nível.HeaderText = "Nível";
             this.Nível.Name = "Nível";
-            this.Nível.Width = 250;
+            this.Nível.Width = 225;
+            // 
+            // Quantidade
+            // 
+            this.Quantidade.Frozen = true;
+            this.Quantidade.HeaderText = "Quantidade";
+            this.Quantidade.Name = "Quantidade";
             // 
             // HorasNecessárias
             // 
@@ -313,22 +378,10 @@
             // Remover
             // 
             this.Remover.HeaderText = "Remover";
+            this.Remover.Image = global::IHC.Properties.Resources.excluir;
             this.Remover.Name = "Remover";
             this.Remover.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Remover.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // btnSalvar
-            // 
-            this.btnSalvar.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnSalvar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSalvar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSalvar.Location = new System.Drawing.Point(18, 709);
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(810, 37);
-            this.btnSalvar.TabIndex = 28;
-            this.btnSalvar.Text = "Salvar e Finalizar";
-            this.btnSalvar.UseVisualStyleBackColor = false;
-            this.btnSalvar.Click += new System.EventHandler(this.BtnSalvar_Click);
             // 
             // ProjectForm
             // 
@@ -336,7 +389,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.ClientSize = new System.Drawing.Size(891, 530);
+            this.ClientSize = new System.Drawing.Size(865, 619);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.numQuantidade);
+            this.Controls.Add(this.txtDescricao);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.dgvRecursos);
             this.Controls.Add(this.label9);
@@ -367,6 +424,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numReceita)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numHoras)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecursos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numQuantidade)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -396,9 +454,14 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridView dgvRecursos;
         private System.Windows.Forms.Button btnSalvar;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtDescricao;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown numQuantidade;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cargo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nível;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantidade;
         private System.Windows.Forms.DataGridViewTextBoxColumn HorasNecessárias;
         private System.Windows.Forms.DataGridViewImageColumn Remover;
     }

@@ -150,11 +150,14 @@ namespace IHC
             {
                 if (e.ColumnIndex == 5)
                 {
-                    if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o projeto?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    string id = dgvProjects.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    if (id.Trim() != "")
                     {
-                        string id = dgvProjects.Rows[e.RowIndex].Cells[0].Value.ToString();
-                        _service.DeleteById(int.Parse(id));
-                        LoadToDataGridView();
+                        if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o projeto?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                        {
+                            _service.DeleteById(int.Parse(id));
+                            LoadToDataGridView();
+                        }
                     }
                 }
                 else if (e.ColumnIndex == 4)

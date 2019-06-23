@@ -34,17 +34,26 @@ namespace IHC
             if (txtCargo.Text.Trim() == "")
             {
                 MessageBox.Show("Nome do cargo é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                throw new Exception();
             }
 
             if (txtNivel.Text.Trim() == "")
             {
                 MessageBox.Show("Nível do cargo é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                throw new Exception();
             }
         }
 
         private void BtnSalvar_Click(object sender, EventArgs e)
         {
-            ValidateData();
+            try
+            {
+                ValidateData();
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
             JobRole jobRole = new JobRole()
             {
                 Name = txtCargo.Text,

@@ -30,8 +30,9 @@ namespace IHC.Repositories
         {
             var projectToUpdate = Context.Projects.First(p => p.Id == project.Id);
             projectToUpdate.Name = project.Name;
-            projectToUpdate.StartDate = project.StartDate;
-            projectToUpdate.EndDate = project.EndDate;
+            projectToUpdate.StartDate = project.StartDate.Date;
+            projectToUpdate.EndDate = project.EndDate.Date;
+            projectToUpdate.Description = project.Description;
             projectToUpdate.ExpectedReveneu = project.ExpectedReveneu;
             projectToUpdate.State = project.State;
             projectToUpdate.Customer = project.Customer;
@@ -66,7 +67,8 @@ namespace IHC.Repositories
 
         public IEnumerable<Project> ReadWithParameters(DateTime startDate, DateTime endDate, long customerId, ProjectState state)
         {
-            startDate = startDate.AddDays(-1);
+            startDate = startDate.AddDays(-1).Date;
+            endDate = endDate.Date;
             if (customerId <= 0 && state == ProjectState.NULL)
             {
                 return Context.Projects.Where(p => p.StartDate >= startDate && p.StartDate <= endDate);

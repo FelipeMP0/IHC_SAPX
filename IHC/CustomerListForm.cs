@@ -45,18 +45,21 @@ namespace IHC
             {
                 if (e.ColumnIndex == 4)
                 {
-                    if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o cliente?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                    string id = dgvCustomers.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    if (id.Trim() != "")
                     {
-                        string id = dgvCustomers.Rows[e.RowIndex].Cells[0].Value.ToString();
-                        int idI = int.Parse(id);
-                        if (!_projectService.ExistsWithCustomerId(idI))
+                        if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o cliente?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                         {
-                            _service.DeleteById(idI);
-                            LoadToDataGridView();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Clientes associados a projetos não podem ser excluídos!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            int idI = int.Parse(id);
+                            if (!_projectService.ExistsWithCustomerId(idI))
+                            {
+                                _service.DeleteById(idI);
+                                LoadToDataGridView();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Clientes associados a projetos não podem ser excluídos!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
                 }

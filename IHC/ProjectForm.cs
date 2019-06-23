@@ -31,10 +31,10 @@ namespace IHC
             defaultManager = new Manager()
             {
                 Id = 1,
-                Name = "teste",
-                Phone = "fasdfs",
-                Email = "fasdf",
-                Password = "fsadf"
+                Name = "Gerente",
+                Phone = "11123456789",
+                Email = "teste@teste.com",
+                Password = "123456"
             };
 
             Manager foundManager = _managerService.ReadById(defaultManager.Id);
@@ -48,6 +48,7 @@ namespace IHC
             numReceita.DecimalPlaces = 2;
             numReceita.Maximum = 999999;
             numHoras.Minimum = 1;
+            numQuantidade.Minimum = 1;
         }
 
         public ProjectForm(long id) : this()
@@ -63,6 +64,7 @@ namespace IHC
                 txtNome.Text = project.Name;
                 dtpInicio.Value = project.StartDate;
                 dtpFim.Value = project.EndDate;
+                txtDescricao.Text = project.Description;
                 numReceita.Value = (decimal)project.ExpectedReveneu;
                 cbEstado.Text = ProjectStateExtensions.ToDescriptionString(project.State);
                 cbCliente.Text = project.Customer.Id + " " + project.Customer.Name;
@@ -72,7 +74,7 @@ namespace IHC
                     foreach (var planning in project.Plannings)
                     {
                         planning.JobRole = _jobRoleService.ReadById(planning.JobRoleId);
-                        dgvRecursos.Rows.Add(planning.JobRole.Id, planning.JobRole.Name, planning.JobRole.Level, planning.PlannedHours);
+                        dgvRecursos.Rows.Add(planning.JobRole.Id, planning.JobRole.Name, planning.JobRole.Level, planning.Quantity, planning.PlannedHours);
                         planning.JobRole = null;
                     }
                 }
@@ -104,6 +106,12 @@ namespace IHC
             if (txtNome.Text.Trim() == "")
             {
                 MessageBox.Show("Nome do projeto é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                throw new Exception();
+            }
+
+            if (dtpInicio.Value.Date.CompareTo(dtpFim.Value.Date) > 0)
+            {
+                MessageBox.Show("Data final deve ser após a data inicial", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 throw new Exception();
             }
 
@@ -156,8 +164,9 @@ namespace IHC
                 Project project = new Project()
                 {
                     Name = txtNome.Text,
-                    StartDate = dtpInicio.Value,
-                    EndDate = dtpFim.Value,
+                    StartDate = dtpInicio.Value.Date,
+                    EndDate = dtpFim.Value.Date,
+                    Description = txtDescricao.Text,
                     ExpectedReveneu = (double)numReceita.Value,
                     State = projectState,
                     ManagerId = defaultManager.Id,
@@ -188,7 +197,8 @@ namespace IHC
                         {
                             JobRoleId = jobRole.Id,
                             ProjectId = project.Id,
-                            PlannedHours = Convert.ToInt32(row.Cells[3].Value)
+                            Quantity = Convert.ToInt32(row.Cells[3].Value),
+                            PlannedHours = Convert.ToInt32(row.Cells[4].Value)
                         };
 
                         plannings.Add(planning);
@@ -256,16 +266,23 @@ namespace IHC
         private void BtnAdicionarRecurso_Click(object sender, EventArgs e)
         {
             string[] values = cbRecurso.Text.Split(' ');
-            dgvRecursos.Rows.Add(values[0], values[1], values[2], numHoras.Value.ToString(), null);
+            if (values[0].Trim() != "")
+            {
+                dgvRecursos.Rows.Add(values[0], values[1], values[2], numQuantidade.Value.ToString(), numHoras.Value.ToString(), null);
+            }
         }
 
         private void DgvRecursos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                if (e.ColumnIndex == 4)
+                if (e.ColumnIndex == 5)
                 {
-                    dgvRecursos.Rows.RemoveAt(dgvRecursos.SelectedRows[0].Index);
+                    string id = dgvRecursos.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    if (id.Trim() != "")
+                    {
+                        dgvRecursos.Rows.RemoveAt(dgvRecursos.SelectedRows[0].Index);
+                    }
                 }
             }
             catch (Exception)

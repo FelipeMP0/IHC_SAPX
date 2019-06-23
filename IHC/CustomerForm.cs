@@ -14,6 +14,7 @@ namespace IHC
         {
             InitializeComponent();
             _service = new CustomerService();
+            txtCNPJ.KeyPress += TxtCNPJ_KeyPress;
         }
 
         public CustomerForm(long id) : this()
@@ -36,28 +37,51 @@ namespace IHC
             if (txtCNPJ.Text.Trim() == "")
             {
                 MessageBox.Show("CNPJ/CPF do cliente é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                throw new Exception();
+            }
+
+            if (txtCNPJ.Text.Trim().Length < 11)
+            {
+                MessageBox.Show("CNPJ/CPF do cliente inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                throw new Exception();
             }
 
             if (txtNome.Text.Trim() == "")
             {
                 MessageBox.Show("Nome do cliente é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                throw new Exception();
             }
 
             if (txtTelefone.Text.Trim() == "")
             {
                 MessageBox.Show("Telefone do cliente é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                throw new Exception();
             }
         }
 
         private void BtnIncluir_Click(object sender, EventArgs e)
         {
-            ValidateData();
-            if (_service.existsWithDocument(txtCNPJ.Text))
+            try
             {
-                MessageBox.Show("CPF ou CNPJ já cadastrado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                ValidateData();
+            }
+            catch (Exception)
+            {
                 return;
             }
+
+            Customer foundCustomer = _service.existsWithDocument(txtCNPJ.Text);
+
+            if (foundCustomer != null)
+            {
+                if (foundCustomer.Id != idToUpdate)
+                {
+                    MessageBox.Show("CPF ou CNPJ já cadastrado", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    return;
+                }
+            }
+
             Customer customer = new Customer()
             {
                 Name = txtNome.Text,
@@ -93,6 +117,20 @@ namespace IHC
                 txtCNPJ.Text = customer.Document;
                 txtEmail.Text = customer.Email;
                 txtTelefone.Text = customer.Phone;
+            }
+        }
+
+        private void TxtCNPJ_TextChanged(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void TxtCNPJ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Este campo aceita apenas números");
             }
         }
     }

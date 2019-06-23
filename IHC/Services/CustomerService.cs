@@ -24,7 +24,7 @@ namespace IHC.Services
             _customerRepository.DeleteById(id);
         }
 
-        public bool existsWithDocument(string document)
+        public Customer existsWithDocument(string document)
         {
             return _customerRepository.existsWithDocument(document);
         }
