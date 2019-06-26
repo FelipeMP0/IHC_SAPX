@@ -67,6 +67,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Customer\DeletedCustomersList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Customer\DeletedCustomersList.Designer.cs">
+      <DependentUpon>DeletedCustomersList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\JobRole\DeletedJobRolesList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\JobRole\DeletedJobRolesList.Designer.cs">
+      <DependentUpon>DeletedJobRolesList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Project\DeletedProjectsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Project\DeletedProjectsList.Designer.cs">
+      <DependentUpon>DeletedProjectsList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Reports\CargosMaisUsados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +176,15 @@
     <Compile Include="Services\ProjectService.cs" />
     <Compile Include="Utils\DocumentUtils.cs" />
     <Compile Include="Utils\RegexUtilities.cs" />
+    <EmbeddedResource Include="Forms\Customer\DeletedCustomersList.resx">
+      <DependentUpon>DeletedCustomersList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\JobRole\DeletedJobRolesList.resx">
+      <DependentUpon>DeletedJobRolesList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Project\DeletedProjectsList.resx">
+      <DependentUpon>DeletedProjectsList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Reports\CargosMaisUsados.resx">
       <DependentUpon>CargosMaisUsados.cs</DependentUpon>
     </EmbeddedResource>
@@ -224,6 +251,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\Resources\restaurar.png" />
     <Content Include="Resources\editar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

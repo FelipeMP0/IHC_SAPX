@@ -48,14 +48,22 @@ namespace IHC.Repositories
             return Context.JobRoles.FirstOrDefault(jb => jb.Id == id);
         }
 
-        public IEnumerable<JobRole> ReadAll()
+        public IEnumerable<JobRole> ReadAll(bool active)
         {
-            return Context.JobRoles.OrderBy(jb => jb.Id);
+            return Context.JobRoles.Where(c => c.Active == active).OrderBy(jb => jb.Id);
         }
 
         public void Dispose()
         {
             Context.Dispose();
+        }
+
+        public void ActivateOrDeactivateById(long id, bool active)
+        {
+            var jobRoleToUpdate = Context.JobRoles.First(jb => jb.Id == id);
+            jobRoleToUpdate.Active = active;
+            Context.Entry(jobRoleToUpdate).Property(jb => jb.Active).IsModified = true;
+            Context.SaveChanges();
         }
     }
 }

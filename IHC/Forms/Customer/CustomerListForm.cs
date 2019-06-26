@@ -1,4 +1,5 @@
-﻿using IHC.Models;
+﻿using IHC.Forms.Customer;
+using IHC.Models;
 using IHC.Services;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace IHC
         {
             _service = new CustomerService();
             dgvCustomers.Rows.Clear();
-            IEnumerable<Customer> customers = _service.ReadAll();
+            IEnumerable<Customer> customers = _service.ReadAll(true);
             foreach (var customer in customers)
             {
                 dgvCustomers.Rows.Add(customer.Id, customer.Document, customer.Name, null, null);
@@ -53,7 +54,7 @@ namespace IHC
                             int idI = int.Parse(id);
                             if (!_projectService.ExistsWithCustomerId(idI))
                             {
-                                _service.DeleteById(idI);
+                                _service.ActivateOrDeactivateById(idI, false);
                                 LoadToDataGridView();
                             }
                             else
@@ -70,10 +71,16 @@ namespace IHC
                     customerForm.ShowDialog();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
+        }
+
+        private void BtnIncluir_Click(object sender, EventArgs e)
+        {
+            DeletedCustomersList deletedCustomersList = new DeletedCustomersList();
+            deletedCustomersList.ShowDialog();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace IHC.Services.Interfaces
         JobRole Update(JobRole jobRole);
         void DeleteById(long id);
         JobRole ReadById(long id);
-        IEnumerable<JobRole> ReadAll();
+        IEnumerable<JobRole> ReadAll(bool active);
+        void ActivateOrDeactivateById(long id, bool active);
     }
 }

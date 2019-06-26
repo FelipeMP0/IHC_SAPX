@@ -22,5 +22,6 @@ namespace IHC.Models
         [StringLength(100)]
         public string Email { get; set; }
         public ICollection<Project> Projects { get; set; }
+        public bool Active { get; set; } = true;
     }
 }

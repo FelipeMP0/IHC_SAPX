@@ -28,6 +28,6 @@ namespace IHC.Models
         public long CustomerId { get; set; }
         public Customer Customer { get; set; }
         public ICollection<Planning> Plannings { get; set; }
-
+        public bool Active { get; set; } = true;
     }
 }

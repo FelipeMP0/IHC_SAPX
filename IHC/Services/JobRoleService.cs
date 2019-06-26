@@ -24,9 +24,9 @@ namespace IHC.Services
             _jobRoleRepository.DeleteById(id);
         }
 
-        public IEnumerable<JobRole> ReadAll()
+        public IEnumerable<JobRole> ReadAll(bool active)
         {
-            return _jobRoleRepository.ReadAll();
+            return _jobRoleRepository.ReadAll(active);
         }
 
         public JobRole ReadById(long id)
@@ -37,6 +37,11 @@ namespace IHC.Services
         public JobRole Update(JobRole jobRole)
         {
             return _jobRoleRepository.Update(jobRole);
+        }
+
+        public void ActivateOrDeactivateById(long id, bool active)
+        {
+            _jobRoleRepository.ActivateOrDeactivateById(id, active);
         }
     }
 }

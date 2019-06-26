@@ -14,5 +14,7 @@ namespace IHC.Repositories.Interfaces
         IEnumerable<Project> ReadAll();
         IEnumerable<Project> ReadWithParameters(DateTime startDate, DateTime endDate, long customerId, ProjectState state);
         bool ExistsWithCustomerId(int id);
+        Project ActivateOrDeactivateById(long id, bool active);
+        IEnumerable<Project> ReadAll(bool active);
     }
 }

@@ -36,6 +36,7 @@
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Editar = new System.Windows.Forms.DataGridViewImageColumn();
             this.Remover = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnIncluir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,12 +116,26 @@
             this.Remover.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Remover.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // btnIncluir
+            // 
+            this.btnIncluir.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnIncluir.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIncluir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnIncluir.Location = new System.Drawing.Point(523, 12);
+            this.btnIncluir.Name = "btnIncluir";
+            this.btnIncluir.Size = new System.Drawing.Size(265, 37);
+            this.btnIncluir.TabIndex = 21;
+            this.btnIncluir.Text = "Restaurar Clientes";
+            this.btnIncluir.UseVisualStyleBackColor = false;
+            this.btnIncluir.Click += new System.EventHandler(this.BtnIncluir_Click);
+            // 
             // CustomerListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnIncluir);
             this.Controls.Add(this.dgvCustomers);
             this.Controls.Add(this.label1);
             this.Name = "CustomerListForm";
@@ -143,5 +158,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewImageColumn Editar;
         private System.Windows.Forms.DataGridViewImageColumn Remover;
+        private System.Windows.Forms.Button btnIncluir;
     }
 }

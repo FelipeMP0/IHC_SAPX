@@ -71,19 +71,19 @@ namespace IHC.Repositories
             endDate = endDate.Date;
             if (customerId <= 0 && state == ProjectState.NULL)
             {
-                return Context.Projects.Where(p => p.StartDate >= startDate && p.StartDate <= endDate);
+                return Context.Projects.Where(p => p.StartDate >= startDate && p.StartDate <= endDate && p.Active == true);
             }
             else if (customerId > 0 && state != ProjectState.NULL)
             {
-                return Context.Projects.Where(p => p.StartDate >= startDate && p.StartDate <= endDate && p.CustomerId == customerId && p.State == state);
+                return Context.Projects.Where(p => p.StartDate >= startDate && p.StartDate <= endDate && p.CustomerId == customerId && p.State == state && p.Active == true);
             }
             else if (customerId > 0 && state == ProjectState.NULL)
             {
-                return Context.Projects.Where(p => p.StartDate >= startDate && p.StartDate <= endDate && p.CustomerId == customerId);
+                return Context.Projects.Where(p => p.StartDate >= startDate && p.StartDate <= endDate && p.CustomerId == customerId && p.Active == true);
             }
             else if (customerId <= 0 && state != ProjectState.NULL)
             {
-                return Context.Projects.Where(p => p.StartDate >= startDate && p.StartDate <= endDate && p.State == state);
+                return Context.Projects.Where(p => p.StartDate >= startDate && p.StartDate <= endDate && p.State == state && p.Active == true);
             }
             else
             {
@@ -98,7 +98,23 @@ namespace IHC.Repositories
 
         public bool ExistsWithCustomerId(int id)
         {
-            return Context.Projects.FirstOrDefault(p => p.CustomerId == id) != null ? true : false;
+            return Context.Projects.FirstOrDefault(p => p.CustomerId == id && p.Active == true) != null ? true : false;
+        }
+
+        public Project ActivateOrDeactivateById(long id, bool active)
+        {
+            var projectToUpdate = Context.Projects.First(p => p.Id == id);
+            projectToUpdate.Customer = null;
+            projectToUpdate.Active = active;
+            Context.Entry(projectToUpdate).Property(p => p.Active).IsModified = true;
+            Context.SaveChanges();
+
+            return projectToUpdate;
+        }
+
+        public IEnumerable<Project> ReadAll(bool active)
+        {
+            return Context.Projects.Where(p => p.Active == active);
         }
     }
 }

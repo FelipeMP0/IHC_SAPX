@@ -233,7 +233,7 @@ namespace IHC
         private void LoadCustomersToComboBox()
         {
             cbCliente.Items.Clear();
-            IEnumerable<Customer> customers = _customerService.ReadAll();
+            IEnumerable<Customer> customers = _customerService.ReadAll(true);
             foreach (var customer in customers)
             {
                 cbCliente.Items.Add(customer.Id + " " + customer.Name);
@@ -243,7 +243,7 @@ namespace IHC
         private void LoadJobRolesToComboBox()
         {
             cbRecurso.Items.Clear();
-            IEnumerable<JobRole> jobRoles = _jobRoleService.ReadAll();
+            IEnumerable<JobRole> jobRoles = _jobRoleService.ReadAll(true);
             foreach (var jobRole in jobRoles)
             {
                 cbRecurso.Items.Add(jobRole.Id + " " + jobRole.Name + " " + jobRole.Level);

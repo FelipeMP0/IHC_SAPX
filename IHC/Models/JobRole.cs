@@ -16,5 +16,6 @@ namespace IHC.Models
         [StringLength(100)]
         public string Level { get; set; }
         public ICollection<Planning> Plannings { get; set; }
+        public bool Active { get; set; } = true;
     }
 }

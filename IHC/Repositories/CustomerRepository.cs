@@ -50,9 +50,9 @@ namespace IHC.Repositories
             return Context.Customers.FirstOrDefault(c => c.Id == id);
         }
 
-        public IEnumerable<Customer> ReadAll()
+        public IEnumerable<Customer> ReadAll(bool active)
         {
-            return Context.Customers.OrderBy(c => c.Id);
+            return Context.Customers.Where(c => c.Active == active).OrderBy(c => c.Id);
         }
 
         public Customer existsWithDocument(string document)
@@ -63,6 +63,14 @@ namespace IHC.Repositories
         public void Dispose()
         {
             Context.Dispose();
+        }
+
+        public void ActivateOrDeactivateById(long id, bool active)
+        {
+            var customerToUpdate = Context.Customers.First(c => c.Id == id);
+            customerToUpdate.Active = active;
+            Context.Entry(customerToUpdate).Property(c => c.Active).IsModified = true;
+            Context.SaveChanges();
         }
     }
 }

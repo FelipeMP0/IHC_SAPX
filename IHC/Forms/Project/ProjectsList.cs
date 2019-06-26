@@ -1,4 +1,5 @@
 ﻿using IHC.Enums;
+using IHC.Forms.Project;
 using IHC.Models;
 using IHC.Services;
 using System;
@@ -103,7 +104,7 @@ namespace IHC
             {
                 state = cbEstado.Text == "" || cbEstado.Text == "Todos os Estados" ? ProjectState.NULL : ProjectStateExtensions.GetValueFromDescription<ProjectState>(cbEstado.Text);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 state = ProjectState.NULL;
             }
@@ -133,7 +134,7 @@ namespace IHC
             cbCliente.Items.Clear();
             _customerService = new CustomerService();
             cbCliente.Items.Clear();
-            IEnumerable<Customer> customers = _customerService.ReadAll();
+            IEnumerable<Customer> customers = _customerService.ReadAll(true);
             foreach (var customer in customers)
             {
                 cbCliente.Items.Add(customer.Id + " " + customer.Name);
@@ -155,7 +156,7 @@ namespace IHC
                     {
                         if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o projeto?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                         {
-                            _service.DeleteById(int.Parse(id));
+                            _service.ActivateOrDeactivateById(int.Parse(id), false);
                             LoadToDataGridView();
                         }
                     }
@@ -168,7 +169,7 @@ namespace IHC
                     projectForm.ShowDialog();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -182,6 +183,12 @@ namespace IHC
                 return;
             }
             LoadToDataGridView();
+        }
+
+        private void BtnRestaurar_Click(object sender, EventArgs e)
+        {
+            DeletedProjectsList deletedProjectsList = new DeletedProjectsList();
+            deletedProjectsList.ShowDialog();
         }
     }
 }

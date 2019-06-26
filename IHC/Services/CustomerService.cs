@@ -29,9 +29,9 @@ namespace IHC.Services
             return _customerRepository.existsWithDocument(document);
         }
 
-        public IEnumerable<Customer> ReadAll()
+        public IEnumerable<Customer> ReadAll(bool active)
         {
-            return _customerRepository.ReadAll();
+            return _customerRepository.ReadAll(active);
         }
 
         public Customer ReadById(long id)
@@ -42,6 +42,11 @@ namespace IHC.Services
         public Customer Update(Customer customer)
         {
             return _customerRepository.Update(customer);
+        }
+
+        public void ActivateOrDeactivateById(long id, bool active)
+        {
+            _customerRepository.ActivateOrDeactivateById(id, active);
         }
     }
 }

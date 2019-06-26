@@ -1,4 +1,5 @@
-﻿using IHC.Models;
+﻿using IHC.Forms.JobRole;
+using IHC.Models;
 using IHC.Services;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace IHC
         {
             _service = new JobRoleService();
             dgvJobRoles.Rows.Clear();
-            IEnumerable<JobRole> jobRoles = _service.ReadAll();
+            IEnumerable<JobRole> jobRoles = _service.ReadAll(true);
             foreach (var jobRole in jobRoles)
             {
                 dgvJobRoles.Rows.Add(jobRole.Id, jobRole.Name, jobRole.Level, null, null);
@@ -53,7 +54,7 @@ namespace IHC
                             int idI = int.Parse(id);
                             if (!_planningService.ExistsWithJobRole(idI))
                             {
-                                _service.DeleteById(idI);
+                                _service.ActivateOrDeactivateById(idI, false);
                                 LoadToDataGridView();
                             }
                             else
@@ -71,10 +72,16 @@ namespace IHC
                     jobRoleForm.ShowDialog();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
+        }
+
+        private void BtnRestaurar_Click(object sender, EventArgs e)
+        {
+            DeletedJobRolesList deletedJobRolesList = new DeletedJobRolesList();
+            deletedJobRolesList.ShowDialog();
         }
     }
 }

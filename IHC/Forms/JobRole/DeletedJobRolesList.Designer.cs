@@ -1,6 +1,6 @@
-﻿namespace IHC
+﻿namespace IHC.Forms.JobRole
 {
-    partial class JobRoleListForm
+    partial class DeletedJobRolesList
     {
         /// <summary>
         /// Required designer variable.
@@ -28,15 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvJobRoles = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nível = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Editar = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Remover = new System.Windows.Forms.DataGridViewImageColumn();
-            this.btnRestaurar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvJobRoles)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,34 +45,33 @@
             this.label1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(219, 31);
+            this.label1.Size = new System.Drawing.Size(359, 31);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Lista de Cargos";
+            this.label1.Text = "Lista de Cargos Deletados";
             // 
             // dgvJobRoles
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvJobRoles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvJobRoles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvJobRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvJobRoles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.Nome,
             this.Nível,
-            this.Editar,
-            this.Remover});
-            this.dgvJobRoles.Location = new System.Drawing.Point(12, 68);
+            this.Editar});
+            this.dgvJobRoles.Location = new System.Drawing.Point(12, 61);
             this.dgvJobRoles.MultiSelect = false;
             this.dgvJobRoles.Name = "dgvJobRoles";
             this.dgvJobRoles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvJobRoles.Size = new System.Drawing.Size(770, 355);
-            this.dgvJobRoles.TabIndex = 4;
-            this.dgvJobRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgpJobRoles_CellContentClick);
+            this.dgvJobRoles.Size = new System.Drawing.Size(770, 377);
+            this.dgvJobRoles.TabIndex = 5;
+            this.dgvJobRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvJobRoles_CellContentClick);
             // 
             // Id
             // 
@@ -88,7 +85,7 @@
             this.Nome.Name = "Nome";
             this.Nome.ReadOnly = true;
             this.Nome.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Nome.Width = 250;
+            this.Nome.Width = 300;
             // 
             // Nível
             // 
@@ -96,53 +93,30 @@
             this.Nível.Name = "Nível";
             this.Nível.ReadOnly = true;
             this.Nível.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Nível.Width = 250;
+            this.Nível.Width = 300;
             // 
             // Editar
             // 
-            this.Editar.HeaderText = "Editar";
-            this.Editar.Image = global::IHC.Properties.Resources.editar;
+            this.Editar.HeaderText = "Restaurar";
+            this.Editar.Image = global::IHC.Properties.Resources.restaurar;
             this.Editar.Name = "Editar";
             this.Editar.ReadOnly = true;
             this.Editar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Editar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // Remover
-            // 
-            this.Remover.HeaderText = "Remover";
-            this.Remover.Image = global::IHC.Properties.Resources.excluir;
-            this.Remover.Name = "Remover";
-            this.Remover.ReadOnly = true;
-            this.Remover.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Remover.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // btnRestaurar
-            // 
-            this.btnRestaurar.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnRestaurar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRestaurar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnRestaurar.Location = new System.Drawing.Point(591, 3);
-            this.btnRestaurar.Name = "btnRestaurar";
-            this.btnRestaurar.Size = new System.Drawing.Size(197, 37);
-            this.btnRestaurar.TabIndex = 22;
-            this.btnRestaurar.Text = "Restaurar Cargos";
-            this.btnRestaurar.UseVisualStyleBackColor = false;
-            this.btnRestaurar.Click += new System.EventHandler(this.BtnRestaurar_Click);
-            // 
-            // JobRoleListForm
+            // DeletedJobRolesList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnRestaurar);
             this.Controls.Add(this.dgvJobRoles);
             this.Controls.Add(this.label1);
-            this.Name = "JobRoleListForm";
+            this.Name = "DeletedJobRolesList";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Lista de Cargos";
-            this.Load += new System.EventHandler(this.JobRoleListForm_Load);
+            this.Text = "Lista de Cargos Deletados";
+            this.Load += new System.EventHandler(this.DeletedJobRolesList_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvJobRoles)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -157,7 +131,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nível;
         private System.Windows.Forms.DataGridViewImageColumn Editar;
-        private System.Windows.Forms.DataGridViewImageColumn Remover;
-        private System.Windows.Forms.Button btnRestaurar;
     }
 }

@@ -50,7 +50,7 @@ namespace IHC
             {
                 ValidateData();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return;
             }

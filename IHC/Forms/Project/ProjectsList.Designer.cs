@@ -56,6 +56,7 @@
             this.btnConsultar = new System.Windows.Forms.Button();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn2 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnRestaurar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProjects)).BeginInit();
             this.SuspendLayout();
@@ -357,7 +358,7 @@
             this.btnConsultar.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.btnConsultar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConsultar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnConsultar.Location = new System.Drawing.Point(936, 75);
+            this.btnConsultar.Location = new System.Drawing.Point(946, 75);
             this.btnConsultar.Name = "btnConsultar";
             this.btnConsultar.Size = new System.Drawing.Size(112, 82);
             this.btnConsultar.TabIndex = 24;
@@ -386,12 +387,26 @@
             this.dataGridViewImageColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dataGridViewImageColumn2.Width = 90;
             // 
+            // btnRestaurar
+            // 
+            this.btnRestaurar.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.btnRestaurar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRestaurar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnRestaurar.Location = new System.Drawing.Point(859, 3);
+            this.btnRestaurar.Name = "btnRestaurar";
+            this.btnRestaurar.Size = new System.Drawing.Size(199, 37);
+            this.btnRestaurar.TabIndex = 25;
+            this.btnRestaurar.Text = "Restaurar Projetos";
+            this.btnRestaurar.UseVisualStyleBackColor = false;
+            this.btnRestaurar.Click += new System.EventHandler(this.BtnRestaurar_Click);
+            // 
             // ProjectsList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(1070, 647);
+            this.Controls.Add(this.btnRestaurar);
             this.Controls.Add(this.btnConsultar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbCliente);
@@ -446,6 +461,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
         private System.Windows.Forms.DataGridViewImageColumn Editar;
         private System.Windows.Forms.DataGridViewImageColumn Remover;
+        private System.Windows.Forms.Button btnRestaurar;
     }
 }
 
