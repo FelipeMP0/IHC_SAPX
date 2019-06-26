@@ -1,5 +1,6 @@
 ﻿using IHC.Models;
 using IHC.Services;
+using IHC.Utils;
 using System;
 using System.Windows.Forms;
 
@@ -40,7 +41,23 @@ namespace IHC
                 throw new Exception();
             }
 
-            if (txtCNPJ.Text.Trim().Length < 11)
+            if (txtCNPJ.Text.Length == 11)
+            {
+                if (!DocumentUtils.IsCpf(txtCNPJ.Text))
+                {
+                    MessageBox.Show("CNPJ/CPF do cliente inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    throw new Exception();
+                }
+            }
+            else if (txtCNPJ.Text.Length == 14)
+            {
+                if (!DocumentUtils.IsCnpj(txtCNPJ.Text))
+                {
+                    MessageBox.Show("CNPJ/CPF do cliente inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    throw new Exception();
+                }
+            }
+            else
             {
                 MessageBox.Show("CNPJ/CPF do cliente inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 throw new Exception();
@@ -55,6 +72,12 @@ namespace IHC
             if (txtTelefone.Text.Trim() == "")
             {
                 MessageBox.Show("Telefone do cliente é obrigatório", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                throw new Exception();
+            }
+
+            if (!RegexUtilities.IsValidEmail(txtEmail.Text))
+            {
+                MessageBox.Show("Formato do e-mail é inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 throw new Exception();
             }
         }
@@ -122,7 +145,7 @@ namespace IHC
 
         private void TxtCNPJ_TextChanged(object sender, EventArgs e)
         {
-        
+
         }
 
         private void TxtCNPJ_KeyPress(object sender, KeyPressEventArgs e)

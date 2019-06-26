@@ -3,25 +3,19 @@ using IHC.Models;
 using IHC.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace IHC
 {
-    public partial class ProjetosPorMes : Form
+    public partial class HorasPorMes : Form
     {
-
         private ProjectService projectService;
         private PlanningService planningService;
-        private int projetos = 0;
+        private int horas = 0;
 
-        public ProjetosPorMes()
+        public HorasPorMes()
         {
             InitializeComponent();
             projectService = new ProjectService();
@@ -31,15 +25,25 @@ namespace IHC
             numericUpDown1.Value = DateTime.Now.Year;
         }
 
-        private void ProjetosPorMes_Load(object sender, EventArgs e)
+        private void HorasPorMes_Load(object sender, EventArgs e)
         {
             LoadData();
-            this.chart1.Titles.Add("Projetos X Mês");
+            chart1.Titles.Add("Horas X Mês");
         }
 
         private void SomarHoras(List<Project> projects)
         {
-            projetos = projects.Count;
+            foreach (var project in projects)
+            {
+                project.Plannings = planningService.ReadAllByProjectId(project.Id).ToList();
+                if (project.Plannings.Count != 0)
+                {
+                    foreach (var planning in project.Plannings)
+                    {
+                        horas += planning.PlannedHours;
+                    }
+                }
+            }
         }
 
         private void LoadData()
@@ -70,17 +74,17 @@ namespace IHC
 
                 SomarHoras(projects);
 
-                Percentual.Add(projetos);
+                Percentual.Add(horas);
 
-                projetos = 0;
+                horas = 0;
             }
 
-            this.chart1.Palette = ChartColorPalette.Excel;
-            this.chart1.Series.Clear();
+            chart1.Palette = ChartColorPalette.SeaGreen;
+            chart1.Series.Clear();
 
             for (int i = 0; i < Meses.Length; i++)
             {
-                Series series = this.chart1.Series.Add(Meses[i]);
+                Series series = chart1.Series.Add(Meses[i]);
                 series.Points.Add(Percentual[i]);
             }
         }
