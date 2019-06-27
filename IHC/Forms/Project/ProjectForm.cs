@@ -254,6 +254,8 @@ namespace IHC
         {
             cbEstado.Items.Add(ProjectStateExtensions.ToDescriptionString(ProjectState.IN_NEGOCIATION));
             cbEstado.Items.Add(ProjectStateExtensions.ToDescriptionString(ProjectState.CONTRACTED));
+            cbEstado.Items.Add(ProjectStateExtensions.ToDescriptionString(ProjectState.CONCLUDED));
+            cbEstado.Items.Add(ProjectStateExtensions.ToDescriptionString(ProjectState.CANCELLED));
         }
 
         private void ProjectForm_Load(object sender, EventArgs e)

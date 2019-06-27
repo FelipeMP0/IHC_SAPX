@@ -7,9 +7,12 @@ namespace IHC.Enums
     {
         [Description("Em negociação")]
         IN_NEGOCIATION,
-
         [Description("Contratado")]
         CONTRACTED,
+        [Description("Cancelado")]
+        CANCELLED,
+        [Description("Concluído")]
+        CONCLUDED,
         NULL
     }
 

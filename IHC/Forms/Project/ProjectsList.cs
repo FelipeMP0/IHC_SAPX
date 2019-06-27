@@ -126,6 +126,8 @@ namespace IHC
             cbEstado.Items.Clear();
             cbEstado.Items.Add(ProjectStateExtensions.ToDescriptionString(ProjectState.IN_NEGOCIATION));
             cbEstado.Items.Add(ProjectStateExtensions.ToDescriptionString(ProjectState.CONTRACTED));
+            cbEstado.Items.Add(ProjectStateExtensions.ToDescriptionString(ProjectState.CONCLUDED));
+            cbEstado.Items.Add(ProjectStateExtensions.ToDescriptionString(ProjectState.CANCELLED));
             cbEstado.Items.Add("Todos os Estados");
         }
 
@@ -156,8 +158,16 @@ namespace IHC
                     {
                         if (DialogResult.Yes == MessageBox.Show("Tem certeza que deseja excluir o projeto?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                         {
-                            _service.ActivateOrDeactivateById(int.Parse(id), false);
-                            LoadToDataGridView();
+                            Project projectToDelete = _service.ReadById(int.Parse(id));
+                            if (projectToDelete.State == ProjectState.CONCLUDED || projectToDelete.State == ProjectState.CANCELLED)
+                            {
+                                _service.ActivateOrDeactivateById(int.Parse(id), false);
+                                LoadToDataGridView();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Não é permitido excluir projetos não concluídos ou cancelados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            }
                         }
                     }
                 }
